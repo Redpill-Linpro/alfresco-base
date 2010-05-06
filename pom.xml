@@ -1,0 +1,330 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.redpill-linpro.alfresco</groupId>
+	<artifactId>alfresco-base</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Redpill Linpro Alfresco Base Super POM</name>
+	<description>The Super POM for all RLP based Alfresco projects	</description>
+
+	<repositories>
+		<repository>
+			<id>redpill-linpro-snapshots</id>
+			<url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots
+			</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>redpill-linpro-public</id>
+			<url>http://javadev.redpill-linpro.com/nexus/content/groups/public
+			</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>redpill-linpro-public</id>
+			<url>http://javadev.redpill-linpro.com/nexus/content/groups/public
+			</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>redpill-linpro-public-snapshots</id>
+			<url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots
+			</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.alfresco</groupId>
+				<artifactId>alfresco-repository</artifactId>
+				<version>3.2.0r</version>
+				<scope>provided</scope>
+				<classifier>enterprise</classifier>
+			</dependency>
+
+			<dependency>
+				<groupId>org.alfresco</groupId>
+				<artifactId>alfresco-core</artifactId>
+				<version>3.2.0r</version>
+				<scope>provided</scope>
+				<classifier>enterprise</classifier>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring</artifactId>
+				<version>2.0.8</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.0.3</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<!--
+		The scm is required for the buildnumber-maven-plugin which is required
+		for AMP version numbering
+	-->
+	<scm>
+		<connection>scm:svn:http://domain.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/
+		</developerConnection>
+		<url>http://domain.com/svn/trunk/</url>
+	</scm>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-nosnapshot-plugin</artifactId>
+					<groupId>com.sourcesense.maven</groupId>
+					<version>0.0.7-RL</version>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>strip</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>buildnumber-maven-plugin</artifactId>
+					<version>1.0-beta-2</version>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>create</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<revisionOnScmFailure>1</revisionOnScmFailure>
+						<doCheck>false</doCheck>
+						<doUpdate>false</doUpdate>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.alfresco.maven.plugin</groupId>
+					<artifactId>maven-amp-plugin</artifactId>
+					<version>3.0.3-RL</version>
+					<extensions>true</extensions>
+					<configuration>
+						<archive>
+							<addMavenDescriptor>false</addMavenDescriptor>
+						</archive>
+						<overlays>
+							<!--
+								This sample adds records management module in the finally built
+								AMP <overlay> <groupId>org.org.alfresco</groupId>
+								<artifactId>recordsmanagement</artifactId>
+								<version>2.1.0</version> <type>amp</type> </overlay>
+							-->
+							<!--
+								The current AMP is always last in order to overwrite other
+								modules' modules.properties <overlay></overlay>
+							-->
+						</overlays>
+					</configuration>
+				</plugin>
+
+				<!-- when cleaning, clean this stuff also -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>${alfresco.web.dir}/WEB-INF/classes/alfresco/extension
+								</directory>
+							</fileset>
+							<fileset>
+								<directory>${alfresco.web.dir}/WEB-INF/classes/alfresco/module
+								</directory>
+							</fileset>
+							<fileset>
+								<directory>${alfresco.web.dir}/jsp/extension</directory>
+							</fileset>
+							<fileset>
+								<directory>${alfresco.web.dir}/WEB-INF/lib</directory>
+								<includes>
+									<include>${project.artifactId}-${project.version}.jar
+                    </include>
+								</includes>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-dependencies</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-dependencies</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${alfresco.web.dir}/WEB-INF/lib
+								</outputDirectory>
+								<overWriteReleases>false</overWriteReleases>
+								<overWriteSnapshots>false</overWriteSnapshots>
+								<overWriteIfNewer>true</overWriteIfNewer>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- First lets make sure the JAR is built -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>package</phase>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- copy the actual jar file to the Alfresco web app WEB-INF/lib -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.2</version>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${alfresco.web.dir}/WEB-INF/lib
+								</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${project.build.directory}</directory>
+										<includes>
+											<include>${project.artifactId}-${project.version}.jar
+											</include>
+										</includes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+						
+						<execution>
+							<id>copy-web-resources</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${alfresco.web.dir}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>src/main/webapp</directory>
+										<excludes>
+											<exclude>META-INF/**</exclude>
+										</excludes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+						
+						<execution>
+							<id>copy-config-resources</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${alfresco.web.dir}/WEB-INF/classes/extension
+								</outputDirectory>
+								<resources>
+									<resource>
+										<directory>src/main/config/extension</directory>
+										<includes>
+											<include>**/*</include>
+										</includes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**README-*</exclude>
+				</excludes>
+			</resource>
+			
+			<resource>
+				<directory>src/main/webapp</directory>
+				<includes>
+					<include>**/META-INF/faces-config.xml</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/config</directory>
+				<targetPath>alfresco/module/${project.artifactId}</targetPath>
+				<excludes>
+					<exclude>**README-*</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
