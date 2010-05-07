@@ -99,7 +99,7 @@
 				<plugin>
 					<artifactId>maven-nosnapshot-plugin</artifactId>
 					<groupId>com.sourcesense.maven</groupId>
-					<version>0.0.7-RL</version>
+					<version>0.0.7-SNAPSHOT</version>
 					<executions>
 						<execution>
 							<id>default</id>
@@ -134,7 +134,7 @@
 				<plugin>
 					<groupId>org.alfresco.maven.plugin</groupId>
 					<artifactId>maven-amp-plugin</artifactId>
-					<version>3.0.3-RL</version>
+					<version>3.0.3-SNAPSHOT</version>
 					<extensions>true</extensions>
 					<configuration>
 						<archive>
@@ -246,7 +246,7 @@
 								</resources>
 							</configuration>
 						</execution>
-						
+
 						<execution>
 							<id>copy-web-resources</id>
 							<phase>package</phase>
@@ -265,7 +265,7 @@
 								</resources>
 							</configuration>
 						</execution>
-						
+
 						<execution>
 							<id>copy-config-resources</id>
 							<phase>package</phase>
@@ -298,7 +298,7 @@
 					<exclude>**README-*</exclude>
 				</excludes>
 			</resource>
-			
+
 			<resource>
 				<directory>src/main/webapp</directory>
 				<includes>
@@ -326,5 +326,16 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>redpill-linpro-releases</id>
+			<url>http://javadev.redpill-linpro.com/nexus/content/repositories/RL-Alfresco-Releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>redpill-linpro-snapshots</id>
+			<url>http://javadev.redpill-linpro.com/nexus/content/repositories/RL-Alfresco-Snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
