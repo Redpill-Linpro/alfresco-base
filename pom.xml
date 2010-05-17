@@ -444,8 +444,8 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <artifactId>maven-nosnapshot-plugin</artifactId>
           <groupId>com.sourcesense.maven</groupId>
+          <artifactId>maven-nosnapshot-plugin</artifactId>
           <version>0.0.7-SNAPSHOT</version>
           <executions>
             <execution>
