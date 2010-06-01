@@ -1633,6 +1633,30 @@
             <sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
           </configuration>
         </plugin>
+
+        <plugin>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <id>refresh-webscripts</id>
+              <phase>verify</phase>
+              <configuration>
+                <tasks>
+                  <exec executable="wget">
+                    <arg value="--delete-after" />
+                    <arg value="--post-data" />
+                    <arg value="reset=on" />
+                    <arg value="http://admin:admin@localhost:8080/alfresco/service/" />
+                  </exec>
+                </tasks>
+              </configuration>
+              <goals>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
 
