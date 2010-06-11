@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
@@ -11,13 +10,13 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <module.id>${artifactId}</module.id>
   </properties>
 
   <repositories>
     <repository>
       <id>redpill-linpro-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots
-			</url>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -25,20 +24,17 @@
     </repository>
     <repository>
       <id>redpill-linpro-public</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public
-			</url>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public</url>
     </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
       <id>redpill-linpro-public</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public
-			</url>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public</url>
     </pluginRepository>
     <pluginRepository>
       <id>redpill-linpro-public-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots
-			</url>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -77,13 +73,11 @@
 	-->
   <scm>
     <connection>scm:svn:http://domain.com/svn/trunk/</connection>
-    <developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/
-		</developerConnection>
+    <developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/</developerConnection>
     <url>http://domain.com/svn/trunk/</url>
   </scm>
 
   <dependencies>
-
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-core</artifactId>
@@ -1468,20 +1462,10 @@
           <version>3.0.3-SNAPSHOT</version>
           <extensions>true</extensions>
           <configuration>
+            <mAmpConfigDirectory>src/main/config</mAmpConfigDirectory>
             <archive>
               <addMavenDescriptor>false</addMavenDescriptor>
             </archive>
-            <overlays>
-              <!--
-                This sample adds records management module in the finally built AMP <overlay>
-                <groupId>org.org.alfresco</groupId> <artifactId>recordsmanagement</artifactId> <version>2.1.0</version>
-                <type>amp</type> </overlay>
-              -->
-              <!--
-                The current AMP is always last in order to overwrite other modules' modules.properties
-                <overlay></overlay>
-              -->
-            </overlays>
           </configuration>
         </plugin>
 
@@ -1493,21 +1477,18 @@
           <configuration>
             <filesets>
               <fileset>
-                <directory>${alfresco.web.dir}/WEB-INF/classes/alfresco/extension
-								</directory>
+                <!-- 
+                <directory>${tomcat.home}/webapps/alfresco/WEB-INF/classes/alfresco/module/${module.id}</directory>
+                -->
+                <directory>${tomcat.home}/shared/classes/alfresco/module/${module.id}</directory>
               </fileset>
               <fileset>
-                <directory>${alfresco.web.dir}/WEB-INF/classes/alfresco/module
-								</directory>
-              </fileset>
-              <fileset>
-                <directory>${alfresco.web.dir}/jsp/extension</directory>
-              </fileset>
-              <fileset>
-                <directory>${alfresco.web.dir}/WEB-INF/lib</directory>
+                <directory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</directory>
+                <!-- 
+                <directory>${tomcat.home}/shared/lib</directory>
+                -->
                 <includes>
-                  <include>${project.artifactId}-${project.version}.jar
-                    </include>
+                  <include>${project.artifactId}-${project.version}.jar</include>
                 </includes>
               </fileset>
             </filesets>
@@ -1525,7 +1506,10 @@
                 <goal>copy-dependencies</goal>
               </goals>
               <configuration>
-                <outputDirectory>${alfresco.web.dir}/WEB-INF/lib</outputDirectory>
+                <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</outputDirectory>
+                <!-- 
+                <outputDirectory>${tomcat.home}/shared/lib</outputDirectory>
+                -->
                 <overWriteReleases>false</overWriteReleases>
                 <overWriteSnapshots>false</overWriteSnapshots>
                 <overWriteIfNewer>true</overWriteIfNewer>
@@ -1550,7 +1534,6 @@
                 <includes>
                   <include>**/*.class</include>
                   <include>**/faces-config.xml</include>
-
                 </includes>
               </configuration>
             </execution>
@@ -1570,14 +1553,15 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <outputDirectory>${alfresco.web.dir}/WEB-INF/lib
-								</outputDirectory>
+                <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</outputDirectory>
+                <!-- 
+                <outputDirectory>${tomcat.home}/shared/lib</outputDirectory>
+                -->
                 <resources>
                   <resource>
                     <directory>${project.build.directory}</directory>
                     <includes>
-                      <include>${project.artifactId}-${project.version}.jar
-											</include>
+                      <include>${project.artifactId}-${project.version}.jar</include>
                     </includes>
                   </resource>
                 </resources>
@@ -1591,7 +1575,7 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <outputDirectory>${alfresco.web.dir}</outputDirectory>
+                <outputDirectory>${tomcat.home}/webapps/alfresco</outputDirectory>
                 <resources>
                   <resource>
                     <directory>src/main/webapp</directory>
@@ -1610,11 +1594,13 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <outputDirectory>${alfresco.web.dir}/WEB-INF/classes/alfresco/extension
-								</outputDirectory>
+                <!-- 
+                <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/classes/alfresco/module</outputDirectory>
+                -->
+                <outputDirectory>${tomcat.home}/shared/classes/alfresco</outputDirectory>
                 <resources>
                   <resource>
-                    <directory>src/main/config/alfresco/extension</directory>
+                    <directory>src/main/config/alfresco</directory>
                     <includes>
                       <include>**/*</include>
                     </includes>
@@ -1635,27 +1621,9 @@
         </plugin>
 
         <plugin>
-          <artifactId>maven-antrun-plugin</artifactId>
-          <version>1.4</version>
-          <executions>
-            <execution>
-              <id>refresh-webscripts</id>
-              <phase>verify</phase>
-              <configuration>
-                <tasks>
-                  <exec executable="wget">
-                    <arg value="--delete-after" />
-                    <arg value="--post-data" />
-                    <arg value="reset=on" />
-                    <arg value="http://admin:admin@localhost:8080/alfresco/service/" />
-                  </exec>
-                </tasks>
-              </configuration>
-              <goals>
-                <goal>run</goal>
-              </goals>
-            </execution>
-          </executions>
+          <groupId>com.redpill-linpro.alfresco</groupId>
+          <artifactId>maven-refresh-webscripts-plugin</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -1678,21 +1646,20 @@
 
       <resource>
         <filtering>true</filtering>
-        <directory>src/main/config/alfresco/module/vgrrepo</directory>
-        <targetPath>alfresco/module/${project.artifactId}</targetPath>
+        <directory>src/main/config/alfresco/templates</directory>
+        <targetPath>alfresco/templates</targetPath>
         <excludes>
           <exclude>**README-*</exclude>
         </excludes>
       </resource>
-
     </resources>
 
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
     </plugins>
