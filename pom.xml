@@ -1463,6 +1463,7 @@
           <extensions>true</extensions>
           <configuration>
             <mAmpConfigDirectory>src/main/config</mAmpConfigDirectory>
+            <mAmpJarExcludes>alfresco/**</mAmpJarExcludes>
             <archive>
               <addMavenDescriptor>false</addMavenDescriptor>
             </archive>
@@ -1646,11 +1647,8 @@
 
       <resource>
         <filtering>true</filtering>
-        <directory>src/main/config/alfresco/templates</directory>
-        <targetPath>alfresco/templates</targetPath>
-        <excludes>
-          <exclude>**README-*</exclude>
-        </excludes>
+        <directory>src/main/config/alfresco</directory>
+        <targetPath>alfresco</targetPath>
       </resource>
     </resources>
 
