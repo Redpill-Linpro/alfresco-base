@@ -1595,10 +1595,26 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <!-- 
-                <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/classes/alfresco/module</outputDirectory>
-                -->
                 <outputDirectory>${tomcat.home}/shared/classes/alfresco</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>src/main/config/alfresco</directory>
+                    <includes>
+                      <include>**/*</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+
+            <execution>
+              <id>copy-config-resources-share</id>
+              <phase>package</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${tomcat.home}/shared/classes/alfresco/web-extension</outputDirectory>
                 <resources>
                   <resource>
                     <directory>src/main/config/alfresco</directory>
