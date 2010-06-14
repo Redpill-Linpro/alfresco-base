@@ -1589,7 +1589,7 @@
             </execution>
 
             <execution>
-              <id>copy-config-resources</id>
+              <id>copy-config-resources-repo</id>
               <phase>package</phase>
               <goals>
                 <goal>copy-resources</goal>
@@ -1659,12 +1659,6 @@
         <includes>
           <include>**/META-INF/faces-config.xml</include>
         </includes>
-      </resource>
-
-      <resource>
-        <filtering>true</filtering>
-        <directory>src/main/config/alfresco</directory>
-        <targetPath>alfresco</targetPath>
       </resource>
     </resources>
 
