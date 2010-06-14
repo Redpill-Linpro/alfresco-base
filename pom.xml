@@ -11,6 +11,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <module.id>${artifactId}</module.id>
+    <webapp.name>alfresco</webapp.name>
   </properties>
 
   <repositories>
@@ -1481,7 +1482,7 @@
                 <directory>${tomcat.home}/shared/classes/alfresco/module/${module.id}</directory>
               </fileset>
               <fileset>
-                <directory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</directory>
+                <directory>${tomcat.home}/webapps/${webapp.name}/WEB-INF/lib</directory>
                 <includes>
                   <include>${project.artifactId}-${project.version}.jar</include>
                 </includes>
@@ -1501,7 +1502,7 @@
                 <goal>copy-dependencies</goal>
               </goals>
               <configuration>
-                <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</outputDirectory>
+                <outputDirectory>${tomcat.home}/webapps/${webapp.name}/WEB-INF/lib</outputDirectory>
                 <overWriteReleases>false</overWriteReleases>
                 <overWriteSnapshots>false</overWriteSnapshots>
                 <overWriteIfNewer>true</overWriteIfNewer>
@@ -1545,7 +1546,7 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</outputDirectory>
+                <outputDirectory>${tomcat.home}/webapps/${webapp.name}/WEB-INF/lib</outputDirectory>
                 <resources>
                   <resource>
                     <directory>${project.build.directory}</directory>
@@ -1564,7 +1565,7 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <outputDirectory>${tomcat.home}/webapps/alfresco</outputDirectory>
+                <outputDirectory>${tomcat.home}/webapps/${webapp.name}</outputDirectory>
                 <resources>
                   <resource>
                     <directory>src/main/webapp</directory>
