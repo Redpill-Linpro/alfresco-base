@@ -1478,16 +1478,10 @@
           <configuration>
             <filesets>
               <fileset>
-                <!-- 
-                <directory>${tomcat.home}/webapps/alfresco/WEB-INF/classes/alfresco/module/${module.id}</directory>
-                -->
                 <directory>${tomcat.home}/shared/classes/alfresco/module/${module.id}</directory>
               </fileset>
               <fileset>
                 <directory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</directory>
-                <!-- 
-                <directory>${tomcat.home}/shared/lib</directory>
-                -->
                 <includes>
                   <include>${project.artifactId}-${project.version}.jar</include>
                 </includes>
@@ -1508,9 +1502,6 @@
               </goals>
               <configuration>
                 <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</outputDirectory>
-                <!-- 
-                <outputDirectory>${tomcat.home}/shared/lib</outputDirectory>
-                -->
                 <overWriteReleases>false</overWriteReleases>
                 <overWriteSnapshots>false</overWriteSnapshots>
                 <overWriteIfNewer>true</overWriteIfNewer>
@@ -1555,9 +1546,6 @@
               </goals>
               <configuration>
                 <outputDirectory>${tomcat.home}/webapps/alfresco/WEB-INF/lib</outputDirectory>
-                <!-- 
-                <outputDirectory>${tomcat.home}/shared/lib</outputDirectory>
-                -->
                 <resources>
                   <resource>
                     <directory>${project.build.directory}</directory>
@@ -1590,7 +1578,6 @@
 
             <execution>
               <id>copy-config-resources-repo</id>
-              <phase>package</phase>
               <goals>
                 <goal>copy-resources</goal>
               </goals>
@@ -1609,7 +1596,6 @@
 
             <execution>
               <id>copy-config-resources-share</id>
-              <phase>package</phase>
               <goals>
                 <goal>copy-resources</goal>
               </goals>
@@ -1618,9 +1604,6 @@
                 <resources>
                   <resource>
                     <directory>src/main/config/alfresco</directory>
-                    <includes>
-                      <include>**/*</include>
-                    </includes>
                   </resource>
                 </resources>
               </configuration>
@@ -1649,9 +1632,6 @@
       <resource>
         <filtering>true</filtering>
         <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>**README-*</exclude>
-        </excludes>
       </resource>
 
       <resource>
