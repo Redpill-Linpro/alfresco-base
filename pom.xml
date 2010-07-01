@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.3.0-fcs-enterprise-SNAPSHOT</version>
+  <version>3.3.1-enterprise-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects	</description>
@@ -1601,7 +1601,7 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <outputDirectory>${tomcat.home}/shared/classes/alfresco/web-extension</outputDirectory>
+                <outputDirectory>${tomcat.home}/shared/classes/alfresco</outputDirectory>
                 <resources>
                   <resource>
                     <directory>src/main/config/alfresco</directory>
