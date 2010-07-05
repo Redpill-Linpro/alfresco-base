@@ -68,10 +68,7 @@
     </dependencies>
   </dependencyManagement>
 
-  <!--
-		The scm is required for the buildnumber-maven-plugin which is required
-		for AMP version numbering
-	-->
+  <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering -->
   <scm>
     <connection>scm:svn:http://domain.com/svn/trunk/</connection>
     <developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/</developerConnection>
@@ -1627,9 +1624,32 @@
         </plugin>
 
         <plugin>
-          <groupId>fr.opensourceecm.maven</groupId>
-          <artifactId>dependenciesGenerator-maven-plugin</artifactId>
-          <version>0.2.1-beta-SNAPSHOT</version>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>yuicompressor-maven-plugin</artifactId>
+          <version>0.9</version>
+          <executions>
+            <execution>
+              <id>minimize-javascript</id>
+              <goals>
+                <goal>compress</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <includes>
+              <include>**/*.js</include>
+              <exclude>**/*.css</exclude>
+            </includes>
+            <excludes>
+              <exclude>**/*-min.js</exclude>
+              <exclude>**/*-min.css</exclude>
+              <exclude>**/WEB-INF/**</exclude>
+              <exclude>**/tiny_mce/**</exclude>
+              <exclude>**/yui/**</exclude>
+              <exclude>**/log4javascript*.js</exclude>
+            </excludes>
+            <webappDirectory>${project.build.directory}/${project.build.finalName}/web</webappDirectory>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
