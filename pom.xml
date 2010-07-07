@@ -1638,7 +1638,7 @@
           <configuration>
             <includes>
               <include>**/*.js</include>
-              <exclude>**/*.css</exclude>
+              <include>**/*.css</include>
             </includes>
             <excludes>
               <exclude>**/*-min.js</exclude>
