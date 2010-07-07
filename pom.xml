@@ -1633,23 +1633,24 @@
               <goals>
                 <goal>compress</goal>
               </goals>
+              <configuration>
+                <excludes>
+                  <exclude>${project.basedir}/src/main/config/**</exclude>
+                  <exclude>**/*-min.js</exclude>
+                  <exclude>**/*-min.css</exclude>
+                  <exclude>**/WEB-INF/**</exclude>
+                  <exclude>**/tiny_mce/**</exclude>
+                  <exclude>**/yui/**</exclude>
+                  <exclude>**/log4javascript*.js</exclude>
+                </excludes>
+                <includes>
+                  <include>**/*.js</include>
+                  <include>**/*.css</include>
+                </includes>
+                <webappDirectory>${project.build.directory}/${project.build.finalName}/web</webappDirectory>
+              </configuration>
             </execution>
           </executions>
-          <configuration>
-            <includes>
-              <include>**/*.js</include>
-              <include>**/*.css</include>
-            </includes>
-            <excludes>
-              <exclude>**/*-min.js</exclude>
-              <exclude>**/*-min.css</exclude>
-              <exclude>**/WEB-INF/**</exclude>
-              <exclude>**/tiny_mce/**</exclude>
-              <exclude>**/yui/**</exclude>
-              <exclude>**/log4javascript*.js</exclude>
-            </excludes>
-            <webappDirectory>${project.build.directory}/${project.build.finalName}/web</webappDirectory>
-          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
