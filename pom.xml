@@ -1599,6 +1599,10 @@
               </configuration>
             </execution>
           </executions>
+
+          <configuration>
+            <overwrite>true</overwrite>
+          </configuration>
         </plugin>
 
         <plugin>
