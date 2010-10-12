@@ -1680,11 +1680,11 @@
   <distributionManagement>
     <repository>
       <id>redpill-linpro-releases</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/RL-Alfresco-Releases</url>
+      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
       <id>redpill-linpro-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/RL-Alfresco-Snapshots</url>
+      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
