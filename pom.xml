@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <module.id>${artifactId}</module.id>
+    <module.id>${project.artifactId}</module.id>
     <webapp.name>alfresco</webapp.name>
   </properties>
 
@@ -1498,6 +1498,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
+          <version>2.3.1</version>
           <executions>
             <execution>
               <id>default</id>
@@ -1662,6 +1663,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
