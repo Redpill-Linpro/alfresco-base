@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.3.4-enterprise-SNAPSHOT</version>
+  <version>3.3.4-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects  </description>
@@ -70,9 +70,9 @@
 
   <!-- The scm is required for the buildnumber-maven-plugin which is required for AMP version numbering -->
   <scm>
-    <connection>scm:svn:http://domain.com/svn/trunk/</connection>
-    <developerConnection>scm:svn:https://${maven.username}@domain.com/svn/trunk/</developerConnection>
-    <url>http://domain.com/svn/trunk/</url>
+    <connection>scm:svn:https://svn.redpill-linpro.com/ext/alfresco_redpill_common/maven/alfresco-base/tags/alfresco-base-3.3.4-enterprise</connection>
+    <developerConnection>scm:svn:https://svn.redpill-linpro.com/ext/alfresco_redpill_common/maven/alfresco-base/tags/alfresco-base-3.3.4-enterprise</developerConnection>
+    <url>https://svn.redpill-linpro.com/ext/alfresco_redpill_common/maven/alfresco-base/tags/alfresco-base-3.3.4-enterprise</url>
   </scm>
 
   <dependencies>
