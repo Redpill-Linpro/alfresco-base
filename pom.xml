@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.3.5.1-enterprise</version>
+  <version>3.3.5.2-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects  </description>
@@ -1586,6 +1586,24 @@
             </execution>
 
             <execution>
+              <id>copy-jrebel-config</id>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${tomcat.home}/webapps/${webapp.name}/WEB-INF/classes</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>${project.build.directory}/classes</directory>
+                    <includes>
+                      <include>rebel.xml</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+
+            <execution>
               <id>copy-config-resources-share</id>
               <goals>
                 <goal>copy-resources</goal>
@@ -1650,6 +1668,25 @@
                 <statistics>false</statistics>
                 <jswarn>false</jswarn>
               </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- If using JRebel, this is a good config -->
+        <plugin>
+          <groupId>org.zeroturnaround</groupId>
+          <artifactId>jrebel-maven-plugin</artifactId>
+          <configuration>
+            <packaging>war</packaging>
+            <alwaysGenerate>true</alwaysGenerate>
+          </configuration>
+          <executions>
+            <execution>
+              <id>generate-rebel-xml</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>generate</goal>
+              </goals>
             </execution>
           </executions>
         </plugin>
