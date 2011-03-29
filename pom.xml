@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.3.5.2-enterprise</version>
+  <version>3.3.5.3-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects  </description>
@@ -295,15 +295,15 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>chemistry-abdera-0.5-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>chemistry-abdera-0.5</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>chemistry-tck-atompub-0.5-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>chemistry-tck-atompub-0.5</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -918,8 +918,8 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>opencmis-test-browser-0.1-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>opencmis-test-browser-0.1</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -1086,29 +1086,29 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>poi-3.7-SNAPSHOT-20100204</artifactId>
-      <version>3.3.5</version>
+      <artifactId>poi-3.7-20100204</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>poi-ooxml-3.7-SNAPSHOT-20100204</artifactId>
-      <version>3.3.5</version>
+      <artifactId>poi-ooxml-3.7-20100204</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>poi-ooxml-schemas-3.7-SNAPSHOT-20100204</artifactId>
-      <version>3.3.5</version>
+      <artifactId>poi-ooxml-schemas-3.7-20100204</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>poi-scratchpad-3.7-SNAPSHOT-20100204</artifactId>
-      <version>3.3.5</version>
+      <artifactId>poi-scratchpad-3.7-20100204</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -1184,64 +1184,64 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-surf-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-api-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-surf-api-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-core-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-surf-core-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-core-configservice-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-surf-core-configservice-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webeditor-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-webeditor-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webeditor-client-jsp-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-webeditor-client-jsp-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webscripts-1.0.0.CI-SNAPSHOT-tests</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-webscripts-1.0.0.CI-tests</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webscripts-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-webscripts-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webscripts-api-1.0.0.CI-SNAPSHOT</artifactId>
-      <version>3.3.5</version>
+      <artifactId>spring-webscripts-api-1.0.0.CI</artifactId>
+      <version>3.3.5-SNAPSHOT</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
