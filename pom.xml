@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.4.1.1-enterprise</version>
+  <version>3.4.1.2-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects  </description>
@@ -13,6 +13,35 @@
     <module.id>${project.artifactId}</module.id>
     <webapp.name>alfresco</webapp.name>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>redpill-linpro-public</id>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public</url>
+    </repository>
+    <repository>
+      <id>redpill-linpro-snapshots</id>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>redpill-linpro-public</id>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>redpill-linpro-public-snapshots</id>
+      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <dependencyManagement>
     <dependencies>
