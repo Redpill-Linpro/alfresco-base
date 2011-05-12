@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.4.1-enterprise</version>
+  <version>3.4.1.1-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects  </description>
@@ -285,15 +285,15 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>chemistry-abdera-0.1-incubating</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>chemistry-abdera-0.1-incubating-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>chemistry-tck-atompub-0.1-incubating</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>chemistry-tck-atompub-0.1-incubating-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -943,8 +943,8 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>opencmis-test-browser-0.1</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>opencmis-test-browser-0.1-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -1202,64 +1202,64 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-surf-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-api-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-surf-api-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-core-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-surf-core-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-surf-core-configservice-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-surf-core-configservice-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webeditor-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-webeditor-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webeditor-client-jsp-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-webeditor-client-jsp-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webscripts-1.0.0.CI-tests</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-webscripts-1.0.0.CI-nightly-tests</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webscripts-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-webscripts-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>spring-webscripts-api-1.0.0.CI</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>spring-webscripts-api-1.0.0.CI-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -1300,15 +1300,15 @@
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>tika-core-0.9</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>tika-core-0.9-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>tika-parsers-0.9</artifactId>
-      <version>3.4.1-SNAPSHOT</version>
+      <artifactId>tika-parsers-0.9-nightly</artifactId>
+      <version>3.4.1</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
@@ -1737,7 +1737,7 @@
           <target>1.6</target>
         </configuration>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
