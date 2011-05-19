@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.4.1.2-enterprise</version>
+  <version>3.4.1.3-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects  </description>
@@ -1558,6 +1558,7 @@
                 <includes>
                   <include>**/*.class</include>
                   <include>**/faces-config.xml</include>
+                  <include>**/*.png</include>
                 </includes>
               </configuration>
             </execution>
