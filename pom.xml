@@ -13,6 +13,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <module.id>${project.artifactId}</module.id>
     <webapp.name>alfresco</webapp.name>
+    <tomcat.home>tomcat-home</tomcat.home>
   </properties>
 
   <repositories>
