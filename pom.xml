@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.4.3.2-enterprise</version>
+  <version>3.4.4-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects  </description>
@@ -79,1365 +79,1365 @@
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-core</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-data-model</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-deployment</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-jlan-embed</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-jndi-client</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-mbeans</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-remote-api</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-repository</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>alfresco-web-client</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>abdera-client-0.4.0-incubating</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>abdera-core-0.4.0-incubating</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>abdera-extensions-json-0.4.0-incubating</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>abdera-i18n-0.4.0-incubating</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>abdera-parser-0.4.0-incubating</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>axiom-api-1.2.5</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>axiom-impl-1.2.5</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>stax-api-1.0.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>wstx-asl-3.2.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>acegi-security-0.8.2_patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>activation</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>addressing-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>ant-1.7.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>antlr-3.3-complete</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>aopalliance</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>apache-mime4j-0.6</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>asm-3.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>axis-1.4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>bcel</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>bcmail-jdk15-1.45</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>bcprov-jdk15-1.45</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>bliki-3.0.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>boilerpipe-1.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>bsf-2.4.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>cglib-2.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>chemistry-abdera-0.1-incubating-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>chemistry-tck-atompub-0.1-incubating-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>chiba-1.3.0-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-beanutils-1.7.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-codec-1.3</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-collections-3.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-compress-1.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-dbcp-1.4-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-digester-1.6</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-discovery-0.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-el</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-fileupload-1.2.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-httpclient-3.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-io-1.4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-jxpath-1.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-lang-2.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-logging-1.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-pool-1.5.5</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-validator-1.4-nightly-20110316</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>commons-modeler</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>cxf-2.2.2-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>postgresql-9.0-801.jdbc4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>dom4j-1.6.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>drew-image-metadata-extractor-2.4.0-beta-1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>ehcache-core-2.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>facebook_070716</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>FastInfoset-1.2.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>fontbox-1.5.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>avalon-framework-4.2.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>batik-all-1.6</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>fop-0.94</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xmlgraphics-commons-1.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>freemarker-2.3.18-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>geronimo-activation_1.1_spec-1.0.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>geronimo-annotation_1.0_spec-1.1.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>geronimo-jaxws_2.1_spec-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>geronimo-stax-api_1.0_spec-1.0.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>geronimo-ws-metadata_2.0_spec-1.1.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>gdata-client-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>gdata-core-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>gdata-docs-3.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>gdata-media-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>google-collect-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>greenmail-1.3-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>guessencoding-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>hibernate-3.2.6-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>hrtlib</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>htmlparser-1.6</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>ibatis-2.3.4.726-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>icu4j_3_6_1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jsp</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>portlet_20</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>servlet</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jakarta-oro-2.0.8</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jaxb-api-2.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jaxb-impl-2.1.7</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jaxb-xjc-2.1.7</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jaxen-1.1-beta-8</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jaxrpc</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jaxws-api-2.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>bsh-1.3.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jbpm-identity-3.3.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jbpm-jpdl-3.3.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>springmodules-jbpm31</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jcr-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jempbox-1.5.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jgroups-2.11.1.Final</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jibx-bind</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jibx-run</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jid3lib-0.5.4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>JMagick</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>joda-time-1.2.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jooconverter-2.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>json</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jsr107cache-1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jstl-1.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jta</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jtds-1.2.5</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jug-asl-2.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>junit-4.6</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jutf7-1.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>lucene-analyzers-2.4.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>lucene-core-2.4.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>lucene-regex-2.4.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>lucene-snowball-2.4.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>mail</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>mockito-all-1.8.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>myfaces-api-1.1.8</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>myfaces-impl-1.1.8</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>neethi-2.0.4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>netcdf-4.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>odmg-3.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>one-jar-boot-0.96-RC4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>ooxml-schemas-1.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>opencmis-test-browser-0.1-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jut</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>openoffice-juh-3.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>openoffice-jurt-3.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>openoffice-ridl-3.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>openoffice-sandbox-2.0.3</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>openoffice-unoil-3.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xstream-1.2.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>opensaml-1.0.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>log4j-1.2.15</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.aop-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.asm-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.beans-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.context-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.context.support-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.core-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.expression-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.jdbc-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.orm-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.transaction-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.web-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>org.springframework.webmvc-3.0.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>pdfbox-1.5.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>PDFRenderer-2009-09-27</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>poi-3.8-beta3-20110506</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>poi-ooxml-3.8-beta3-20110506</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>poi-scratchpad-3.8-beta3-20110506</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>quartz-1.8.3</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>resolver</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>rhino-js-1.6R7</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>rome-0.9</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>jaxp-ri-1.4.3</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>saaj-impl-1.3.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>saxpath</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>shale-test-1.0.4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>slf4j-api-1.5.11</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>slf4j-log4j12-1.5.11</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-surf-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-surf-api-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-surf-core-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-surf-core-configservice-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-webeditor-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-webeditor-client-jsp-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-webscripts-1.0.0.CI-nightly-tests</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-webscripts-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>spring-webscripts-api-1.0.0.CI-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>standard</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>stax-utils-20060502</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>subetha-smtp</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>tagsoup-1.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>tika-core-1.0-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>tika-parsers-1.0-nightly</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>truezip</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>urlrewritefilter-3.1.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>wsdl4j-1.6.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>wss4j-1.5.4-patched</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>wstx-asl-3.2.4</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>serializer</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xalan</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xercesImpl-2.8.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xml-apis</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xml-resolver-1.2</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xmlbeans-2.3.0</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xmlrpc</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>XmlSchema-1.4.5</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xmlsec-1.4.1</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.alfresco</groupId>
       <artifactId>xpp3-1.1.3_8</artifactId>
-      <version>3.4.3</version>
+      <version>3.4.4</version>
       <classifier>enterprise</classifier>
       <scope>provided</scope>
     </dependency>
