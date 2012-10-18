@@ -195,7 +195,6 @@
                   <include>**/faces-config.xml</include>
                   <include>**/*.png</include>
                   <include>**/*.css</include>
-                  <include>**/*.js</include>
                   <include>**/*.ts</include>
                 </includes>
               </configuration>
