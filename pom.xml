@@ -196,6 +196,7 @@
                   <include>**/*.png</include>
                   <include>**/*.css</include>
                   <include>**/*.ts</include>
+                  <include>**/aop.xml</include>
                 </includes>
               </configuration>
             </execution>
