@@ -238,9 +238,6 @@
                 <resources>
                   <resource>
                     <directory>src/main/webapp</directory>
-                    <excludes>
-                      <exclude>META-INF/**</exclude>
-                    </excludes>
                   </resource>
                   <resource>
                     <directory>${project.build.directory}/${project.build.finalName}/web</directory>
