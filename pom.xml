@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>4.1.2-enterprise</version>
+  <version>3.4.12-enterprise</version>
   <packaging>pom</packaging>
   <name>Redpill Linpro Alfresco Base Super POM</name>
   <description>The Super POM for all RLP based Alfresco projects</description>
@@ -78,7 +78,7 @@
     <dependency>
       <groupId>com.redpill-linpro.alfresco</groupId>
       <artifactId>alfresco-sdk</artifactId>
-      <version>4.1.2-enterprise</version>
+      <version>3.4.12-enterprise</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
