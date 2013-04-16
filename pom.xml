@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.redpill-linpro.alfresco</groupId>
 	<artifactId>alfresco-base</artifactId>
-	<version>1.0.1.1</version>
+	<version>1.0.1.2</version>
 	<packaging>pom</packaging>
 	<name>Redpill Linpro Alfresco Parent POM</name>
 	<description>The Parent POM for all RLP based Alfresco projects</description>
@@ -25,6 +25,37 @@
 			for embedded run -->
 		<env>local</env>
 	</properties>
+
+	<developers>
+		<developer>
+			<id>marcus.svensson</id>
+			<name>Marcus Svensson</name>
+			<email>marcus.svensson (at) redpill-linpro.com</email>
+			<organization>Redpill Linpro AB</organization>
+			<organizationUrl>http://www.redpill-linpro.com</organizationUrl>
+			<roles>
+				<role>Founder</role>
+				<role>Architect</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+
+	<contributors>
+		<contributor />
+	</contributors>
+
+
+	<scm>
+	    	<connection>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</connection>
+	    	<developerConnection>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</developerConnection>
+		<url>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</url>
+	</scm>
+	<issueManagement>
+		<system>Git</system>
+		<url>https://localhost/issues</url>
+	</issueManagement>
 
 	<repositories>
 		<repository>
@@ -138,6 +169,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<!-- Override surefire configuration to allow for integration testing -->
 			<!-- <plugin>
@@ -175,6 +207,39 @@
 						</executions>
 
 					</plugin>
+
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<executions>
+					<execution>
+						<id>minimize-javascript</id>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<exclude>${project.basedir}/src/main/amp/config/**/*.js</exclude>
+								<exclude>${project.build.directory}/**/*.js</exclude>
+								<exclude>**/target/**</exclude>
+								<exclude>**/*-min.js</exclude>
+								<exclude>**/*-min.css</exclude>
+								<exclude>**/WEB-INF/**</exclude>
+								<exclude>**/tiny_mce/**</exclude>
+								<exclude>**/log4javascript*.js</exclude>
+							</excludes>
+							<webappDirectory>${project.build.directory}/${project.build.finalName}/web</webappDirectory>
+							<force>true</force>
+							<statistics>false</statistics>
+							<jswarn>false</jswarn>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<preProcessAggregates>true</preProcessAggregates>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<pluginManagement>
