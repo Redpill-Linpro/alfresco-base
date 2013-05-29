@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
   </parent>
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.0.1.4</version>
+  <version>1.0.2.0</version>
   <packaging>pom</packaging>
   
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -92,13 +92,26 @@
       <url>http://javadev.redpill-linpro.com/nexus/content/repositories/Alfresco_artifacts</url>
     </repository>
     <repository>
-      <id>alfresco-private-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/Alfresco_artifacts</url>
+      <id>alfresco-public</id>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+    </repository>
+    <repository>
+      <id>alfresco-public-snapshots</id>
+      <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
+    <!--<repository>
+      <id>alfresco-public-snapshots</id>
+      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/Alfresco_public-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>-->
+    
   </repositories>
 
   <pluginRepositories>
