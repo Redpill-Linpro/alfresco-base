@@ -103,15 +103,6 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
-    <!--<repository>
-      <id>alfresco-public-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/Alfresco_public-snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
-      </snapshots>
-    </repository>-->
-    
   </repositories>
 
   <pluginRepositories>
@@ -234,26 +225,27 @@
             <goals>
               <goal>compress</goal>
             </goals>
-            <configuration>
-              <excludes>
-                <exclude>${project.basedir}/src/main/amp/config/**/*.js</exclude>
-                <exclude>${project.build.directory}/**/*.js</exclude>
-                <exclude>**/target/**</exclude>
-                <exclude>**/*-min.js</exclude>
-                <exclude>**/*-min.css</exclude>
-                <exclude>**/WEB-INF/**</exclude>
-                <exclude>**/tiny_mce/**</exclude>
-                <exclude>**/log4javascript*.js</exclude>
-              </excludes>
-              <webappDirectory>${project.build.directory}/${project.build.finalName}/web</webappDirectory>
-              <force>true</force>
-              <statistics>false</statistics>
-              <jswarn>false</jswarn>
-            </configuration>
           </execution>
         </executions>
         <configuration>
+          <excludes>
+            <exclude>${project.basedir}/src/main/amp/config/**/*.js</exclude>
+            <exclude>${project.build.directory}/**/*.js</exclude>
+            <exclude>**/target/**</exclude>
+            <exclude>**/*-min.js</exclude>
+            <exclude>**/*-min.css</exclude>
+            <exclude>**/WEB-INF/**</exclude>
+            <exclude>**/tiny_mce/**</exclude>
+            <exclude>**/log4javascript*.js</exclude>
+          </excludes>
+          <sourceDirectory>${project.basedir}/src/main/amp/web</sourceDirectory>
+          <outputDirectory>${project.build.directory}/${project.build.finalName}/web</outputDirectory>
+          <force>true</force>
+          <statistics>false</statistics>
+          <jswarn>false</jswarn>
+          <encoding>UTF-8</encoding>
           <preProcessAggregates>true</preProcessAggregates>
+          <excludeResources>true</excludeResources>
         </configuration>
       </plugin>
     </plugins>
@@ -459,7 +451,7 @@
                   <goal>refresh</goal>
                 </goals>
                 <configuration>
-                  <url>http://${tomcat.host}:${tomcat.port}/${alfresco.client.war}/service/</url>
+                  <url>http://${tomcat.host}:${tomcat.port}/${alfresco.client.war}/service/index</url>
                   <password>admin</password>
                 </configuration>
               </execution>
