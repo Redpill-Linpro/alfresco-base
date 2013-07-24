@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-parent</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.0.2.0</version>
+  <version>1.0.2.2</version>
   <packaging>pom</packaging>
   
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -19,7 +19,7 @@
   <!-- | SDK properties have sensible defaults in the SDK parent, | but you can override the properties below to use another version. | For more available properties see the alfresco-sdk-parent POM. -->
   <properties>
     <alfresco.groupId>org.alfresco.enterprise</alfresco.groupId>
-    <alfresco.version>4.1.4</alfresco.version>
+    <alfresco.version>4.1.5</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
     <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
@@ -29,6 +29,7 @@
     <env>local</env>
     <tomcat.host>localhost</tomcat.host>
     <tomcat.port>8080</tomcat.port>
+
   </properties>
 
   <developers>
@@ -333,6 +334,7 @@
                     <includes>
                       <include>**/*.*</include>
                     </includes>
+                    <filtering>true</filtering>
                   </resource>
                 </resources>
               </configuration>
@@ -351,6 +353,7 @@
                     <includes>
                       <include>**/*</include>
                     </includes>
+                    <filtering>true</filtering>
                   </resource>
                 </resources>
               </configuration>
@@ -369,6 +372,7 @@
                     <includes>
                       <include>rebel.xml</include>
                     </includes>
+                    <filtering>true</filtering>
                   </resource>
                 </resources>
               </configuration>
@@ -398,6 +402,9 @@
   <profiles>
     <profile>
       <id>dev</id>
+      <properties>
+        <alfresco.webapp.name>alfresco</alfresco.webapp.name>
+      </properties>
       <build>
         <plugins>
           <plugin>
