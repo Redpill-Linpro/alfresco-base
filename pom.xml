@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-parent</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.0.2.1</version>
+  <version>1.0.2.3</version>
   <packaging>pom</packaging>
   
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -19,7 +19,7 @@
   <!-- | SDK properties have sensible defaults in the SDK parent, | but you can override the properties below to use another version. | For more available properties see the alfresco-sdk-parent POM. -->
   <properties>
     <alfresco.groupId>org.alfresco.enterprise</alfresco.groupId>
-    <alfresco.version>4.1.4</alfresco.version>
+    <alfresco.version>4.1.5</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
     <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
@@ -124,13 +124,14 @@
   <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution 
     POM -->
   <dependencies>
-    <!-- Workaround ticket: 15024-63464 -->
+    <!-- Workaround ticket: 15024-63464 
+	This dependency must be included on the repo project instead so that alfresco-base can be used to build community projects as well
     <dependency>
       <groupId>${alfresco.groupId}</groupId>
       <artifactId>alfresco-enterprise-repository</artifactId>
       <version>${alfresco.version}</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency>-->
     <!-- <dependency> <groupId>${alfresco.groupId}</groupId> <artifactId>alfresco-web-client</artifactId> <version>${alfresco.version}</version> <scope>provided</scope> </dependency> -->
     <!-- Test dependencies -->
     <dependency>
@@ -645,11 +646,11 @@
   <distributionManagement>
     <repository>
       <id>redpill-linpro-releases</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/releases</url>
+      <url>https://javadev.redpill-linpro.com/nexus/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
       <id>redpill-linpro-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/snapshots</url>
+      <url>https://javadev.redpill-linpro.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
