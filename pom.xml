@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.0.2.2</version>
+  <version>1.0.2.3</version>
   <packaging>pom</packaging>
   
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -124,13 +124,14 @@
   <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution 
     POM -->
   <dependencies>
-    <!-- Workaround ticket: 15024-63464 -->
+    <!-- Workaround ticket: 15024-63464 
+	This dependency must be included on the repo project instead so that alfresco-base can be used to build community projects as well
     <dependency>
       <groupId>${alfresco.groupId}</groupId>
       <artifactId>alfresco-enterprise-repository</artifactId>
       <version>${alfresco.version}</version>
       <scope>provided</scope>
-    </dependency>
+    </dependency>-->
     <!-- <dependency> <groupId>${alfresco.groupId}</groupId> <artifactId>alfresco-web-client</artifactId> <version>${alfresco.version}</version> <scope>provided</scope> </dependency> -->
     <!-- Test dependencies -->
     <dependency>
@@ -645,11 +646,11 @@
   <distributionManagement>
     <repository>
       <id>redpill-linpro-releases</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/releases</url>
+      <url>https://javadev.redpill-linpro.com/nexus/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
       <id>redpill-linpro-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/snapshots</url>
+      <url>https://javadev.redpill-linpro.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
