@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.0.2.3</version>
+  <version>1.0.2.4</version>
   <packaging>pom</packaging>
   
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -350,7 +350,7 @@
                 <outputDirectory>${tomcat.home}/shared/classes/alfresco</outputDirectory>
                 <resources>
                   <resource>
-                    <directory>src/main/amp/config/alfresco</directory>
+                    <directory>${project.build.directory}/${project.build.finalName}/config/alfresco</directory>
                     <includes>
                       <include>**/*</include>
                     </includes>
