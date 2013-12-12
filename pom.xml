@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.alfresco.maven</groupId>
     <artifactId>alfresco-sdk-parent</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.1</version>
   </parent>
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.0.2.4</version>
+  <version>1.1.1.1</version>
   <packaging>pom</packaging>
   
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -19,7 +19,7 @@
   <!-- | SDK properties have sensible defaults in the SDK parent, | but you can override the properties below to use another version. | For more available properties see the alfresco-sdk-parent POM. -->
   <properties>
     <alfresco.groupId>org.alfresco.enterprise</alfresco.groupId>
-    <alfresco.version>4.1.5</alfresco.version>
+    <alfresco.version>4.1.6</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
     <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
@@ -29,7 +29,8 @@
     <env>local</env>
     <tomcat.host>localhost</tomcat.host>
     <tomcat.port>8080</tomcat.port>
-
+    <java.source.version>1.6</java.source.version>
+    <java.target.version>1.6</java.target.version>
   </properties>
 
   <developers>
@@ -77,27 +78,19 @@
 
   <repositories>
     <repository>
-      <id>redpill-linpro-public</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public</url>
-    </repository>
-    <repository>
-      <id>redpill-linpro-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots</url>
+      <id>redpill-linpro</id>
+      <url>http://maven.redpill-linpro.com/nexus/content/groups/public</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
     <repository>
-      <id>alfresco-private</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/repositories/Alfresco_artifacts</url>
-    </repository>
-    <repository>
-      <id>alfresco-public</id>
+      <id>alfresco</id>
       <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
     </repository>
     <repository>
-      <id>alfresco-public-snapshots</id>
+      <id>alfresco-snapshots</id>
       <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
       <snapshots>
         <enabled>true</enabled>
@@ -108,12 +101,8 @@
 
   <pluginRepositories>
     <pluginRepository>
-      <id>redpill-linpro-public</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public</url>
-    </pluginRepository>
-    <pluginRepository>
-      <id>redpill-linpro-public-snapshots</id>
-      <url>http://javadev.redpill-linpro.com/nexus/content/groups/public-snapshots</url>
+      <id>redpill-linpro</id>
+      <url>http://maven.redpill-linpro.com/nexus/content/groups/public</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -188,6 +177,15 @@
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>
     <plugins>
+      <!-- Use the jgitflow for enabling Git Flow release workflow -->
+      <plugin>
+        <groupId>com.atlassian.maven.plugins</groupId>
+        <artifactId>maven-jgitflow-plugin</artifactId>
+        <version>1.0-alpha26</version>
+        <configuration>
+                <!-- see goals wiki page for configuration options -->
+        </configuration>
+      </plugin>
       <!-- Override surefire configuration to allow for integration testing -->
       <!-- <plugin> <artifactId>maven-surefire-plugin</artifactId> <configuration> <excludes> <exclude>**/IntTest*.java</exclude> </excludes> </configuration> </plugin> -->
       <plugin>
@@ -254,6 +252,16 @@
 
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.version}</version>
+          <configuration>
+            <source>${java.source.version}</source>
+            <target>${java.target.version}</target>
+          </configuration>
+        </plugin>
+        
         <!-- also clean out local jar file in tomcat -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -386,9 +394,9 @@
         </plugin>
 
         <plugin>
-          <groupId>com.redpill-linpro.alfresco</groupId>
-          <artifactId>maven-refresh-webscripts-plugin</artifactId>
-          <version>1.0.0</version>
+          <groupId>org.redpill-linpro.alfresco</groupId>
+          <artifactId>refreshwebscripts-maven-plugin</artifactId>
+          <version>1.0.2</version>
         </plugin>
 
         <plugin>
@@ -449,8 +457,9 @@
           </plugin>
           
           <plugin>
-            <groupId>com.redpill-linpro.alfresco</groupId>
-            <artifactId>maven-refresh-webscripts-plugin</artifactId>
+            <groupId>org.redpill-linpro.alfresco</groupId>
+            <artifactId>refreshwebscripts-maven-plugin</artifactId>
+            <version>1.0.2</version>
             <executions>
               <execution>
                 <id>webscripts</id>
@@ -617,8 +626,8 @@
         <plugins>
           <plugin>
             <groupId>com.redpill-linpro.alfresco</groupId>
-            <artifactId>artifact-upload-plugin</artifactId>
-            <version>1.0.0</version>
+            <artifactId>artifact-upload-maven-plugin</artifactId>
+            <version>1.0.1</version>
             <executions>
               <execution>
                 <id>artifact-upload</id>
@@ -646,11 +655,11 @@
   <distributionManagement>
     <repository>
       <id>redpill-linpro-releases</id>
-      <url>https://javadev.redpill-linpro.com/nexus/content/repositories/releases</url>
+      <url>http://maven.redpill-linpro.com/nexus/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
       <id>redpill-linpro-snapshots</id>
-      <url>https://javadev.redpill-linpro.com/nexus/content/repositories/snapshots</url>
+      <url>http://maven.redpill-linpro.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
