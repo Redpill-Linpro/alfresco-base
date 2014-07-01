@@ -12,7 +12,7 @@
   <artifactId>alfresco-base</artifactId>
   <version>1.1.1.4</version>
   <packaging>pom</packaging>
-  
+
   <name>Redpill Linpro Alfresco Parent POM</name>
   <description>The Parent POM for all RLP based Alfresco projects</description>
 
@@ -34,6 +34,8 @@
     <maven.failsafe.version>2.17</maven.failsafe.version>
     <maven.tomcat.version>2.2</maven.tomcat.version>
     <jacoco.version>0.7.1.201405082137</jacoco.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <developers>
@@ -171,7 +173,7 @@
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>
     <plugins>
-    
+
       <!-- ###################################################################### -->
       <!-- Set default properties so that we don't have to multiply plugin config -->
       <!-- ###################################################################### -->
@@ -214,14 +216,14 @@
           </execution>
         </executions>
       </plugin>
-      
+
       <!-- Use the jgitflow for enabling Git Flow release workflow -->
       <plugin>
         <groupId>com.atlassian.maven.plugins</groupId>
         <artifactId>maven-jgitflow-plugin</artifactId>
         <version>1.0-alpha27</version>
         <configuration>
-                <!-- see goals wiki page for configuration options -->
+          <!-- see goals wiki page for configuration options -->
         </configuration>
       </plugin>
 
@@ -294,7 +296,7 @@
             <target>${java.target.version}</target>
           </configuration>
         </plugin>
-        
+
         <!-- ####################################### -->
         <!-- also clean out local jar file in tomcat -->
         <!-- ####################################### -->
@@ -316,7 +318,7 @@
             </filesets>
           </configuration>
         </plugin>
-        
+
         <!-- ######################################### -->
         <!-- Copy dependency jar files to local tomcat -->
         <!-- ######################################### -->
@@ -489,7 +491,7 @@
               </configuration>
             </execution>
           </executions>
-        </plugin>      
+        </plugin>
 
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
@@ -497,12 +499,12 @@
           <configuration>
             <port>${tomcat.port}</port>
             <extraResources>
-               <extraResource>
-                  <directory>${project.build.testOutputDirectory}</directory>
-                  <includes>
-                     <include>log4j.properties</include>
-                  </includes>
-               </extraResource>
+              <extraResource>
+                <directory>${project.build.testOutputDirectory}</directory>
+                <includes>
+                  <include>log4j.properties</include>
+                </includes>
+              </extraResource>
             </extraResources>
           </configuration>
         </plugin>
@@ -533,7 +535,7 @@
               </execution>
             </executions>
           </plugin>
-          
+
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <executions>
@@ -555,12 +557,12 @@
               </execution>
             </executions>
           </plugin>
-          
+
           <plugin>
             <groupId>org.zeroturnaround</groupId>
             <artifactId>jrebel-maven-plugin</artifactId>
           </plugin>
-          
+
           <plugin>
             <groupId>org.redpill-linpro.alfresco</groupId>
             <artifactId>refreshwebscripts-maven-plugin</artifactId>
@@ -619,7 +621,7 @@
 
     <!-- ########################################################################## -->
     <!-- code coverage profile that enables jacoco which creates nice code coverage -->
-    <!-- on integration tests too                                                   -->
+    <!-- on integration tests too -->
     <!-- ########################################################################## -->
     <profile>
       <id>jenkins</id>
@@ -725,7 +727,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>      
+          </plugin>
         </plugins>
       </build>
     </profile>
@@ -766,11 +768,11 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>      
+          </plugin>
         </plugins>
       </build>
     </profile>
-    
+
   </profiles>
 
   <distributionManagement>
