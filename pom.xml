@@ -288,6 +288,16 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.alfresco.maven.plugin</groupId>
+          <artifactId>alfresco-maven-plugin</artifactId>
+          <version>${maven.alfresco.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <verbose>false</verbose>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven.compiler.version}</version>
