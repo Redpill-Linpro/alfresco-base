@@ -37,6 +37,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spring.framework.version>3.0.5.RELEASE</spring.framework.version>
+    <failsafe.argLine></failsafe.argLine>
   </properties>
 
   <developers>
@@ -239,7 +240,7 @@
             <exclude>**/*IntegrationTest.java</exclude>
             <exclude>**/*FunctionalTest.java</exclude>
           </excludes>
-          <argLine>${jacoco.agent.arg} -Xms256m -Xmx1G -XX:PermSize=300m</argLine>
+          <argLine>${jacoco.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
         </configuration>
         <executions>
           <execution>
@@ -475,7 +476,7 @@
                 <goal>verify</goal>
               </goals>
               <configuration>
-                <argLine>${jacoco-it.agent.arg} -Xms256m -Xmx1G -XX:PermSize=300m</argLine>
+                <argLine>${jacoco-it.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
                 <excludes>
                   <exclude>**/*FunctionalTest.java</exclude>
                 </excludes>
@@ -492,7 +493,7 @@
                 <goal>verify</goal>
               </goals>
               <configuration>
-                <argLine>${jacoco-ft.agent.arg} -Xms256m -Xmx1G -XX:PermSize=300m</argLine>
+                <argLine>${jacoco-ft.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
                 <excludes>
                   <exclude>**/*IntegrationTest.java</exclude>
                 </excludes>
