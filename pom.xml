@@ -36,6 +36,7 @@
     <jacoco.version>0.7.1.201405082137</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring.framework.version>3.0.5.RELEASE</spring.framework.version>
   </properties>
 
   <developers>
@@ -506,6 +507,13 @@
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
+          <dependencies>
+            <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-instrument-tomcat</artifactId>
+              <version>3.0.7.RELEASE</version>
+            </dependency>
+          </dependencies>
           <configuration>
             <port>${tomcat.port}</port>
             <extraResources>
