@@ -595,7 +595,7 @@
           <plugin>
             <groupId>com.redpill-linpro.alfresco</groupId>
             <artifactId>artifact-upload-maven-plugin</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.3</version>
             <executions>
               <execution>
                 <id>artifact-upload</id>
