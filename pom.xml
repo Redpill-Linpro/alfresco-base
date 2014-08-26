@@ -10,16 +10,16 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.0.2.5</version>
+  <version>1.1.1.5</version>
   <packaging>pom</packaging>
-  
+
   <name>Redpill Linpro Alfresco Parent POM</name>
   <description>The Parent POM for all RLP based Alfresco projects</description>
 
   <!-- | SDK properties have sensible defaults in the SDK parent, | but you can override the properties below to use another version. | For more available properties see the alfresco-sdk-parent POM. -->
   <properties>
-    <alfresco.groupId>org.alfresco.enterprise</alfresco.groupId>
-    <alfresco.version>4.2.1</alfresco.version>
+    <alfresco.groupId>org.alfresco</alfresco.groupId>
+    <alfresco.version>4.2.2</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
     <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
@@ -31,6 +31,13 @@
     <tomcat.port>8080</tomcat.port>
     <java.source.version>1.6</java.source.version>
     <java.target.version>1.6</java.target.version>
+    <maven.failsafe.version>2.17</maven.failsafe.version>
+    <maven.tomcat.version>2.2</maven.tomcat.version>
+    <jacoco.version>0.7.1.201405082137</jacoco.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring.framework.version>3.0.5.RELEASE</spring.framework.version>
+    <failsafe.argLine />
   </properties>
 
   <developers>
@@ -113,15 +120,6 @@
   <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution 
     POM -->
   <dependencies>
-    <!-- Workaround ticket: 15024-63464 
-	This dependency must be included on the repo project instead so that alfresco-base can be used to build community projects as well
-    <dependency>
-      <groupId>${alfresco.groupId}</groupId>
-      <artifactId>alfresco-enterprise-repository</artifactId>
-      <version>${alfresco.version}</version>
-      <scope>provided</scope>
-    </dependency>-->
-    <!-- <dependency> <groupId>${alfresco.groupId}</groupId> <artifactId>alfresco-web-client</artifactId> <version>${alfresco.version}</version> <scope>provided</scope> </dependency> -->
     <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>
@@ -177,39 +175,78 @@
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>
     <plugins>
+
+      <!-- ###################################################################### -->
+      <!-- Set default properties so that we don't have to multiply plugin config -->
+      <!-- ###################################################################### -->
+      <plugin>
+        <groupId>org.redpill-linpro.alfresco</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <id>set-default-properties</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>set-properties</goal>
+            </goals>
+            <configuration>
+              <properties>
+                <jacoco.agent.arg />
+                <jacoco-it.agent.arg />
+                <jacoco-ft.agent.arg />
+              </properties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- ############################################################################ -->
+      <!-- Plugin to add enterprise jars to dependency path if it's an enterprise build -->
+      <!-- ############################################################################ -->
+      <plugin>
+        <groupId>org.redpill-linpro.alfresco</groupId>
+        <artifactId>activate-enterprise-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <id>activate-enterprise-build</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>activate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
       <!-- Use the jgitflow for enabling Git Flow release workflow -->
       <plugin>
         <groupId>com.atlassian.maven.plugins</groupId>
         <artifactId>maven-jgitflow-plugin</artifactId>
-        <version>1.0-alpha26</version>
+        <version>1.0-alpha27</version>
         <configuration>
-                <!-- see goals wiki page for configuration options -->
+          <!-- see goals wiki page for configuration options -->
         </configuration>
       </plugin>
+
+      <!-- ################################################################ -->
       <!-- Override surefire configuration to allow for integration testing -->
-      <!-- <plugin> <artifactId>maven-surefire-plugin</artifactId> <configuration> <excludes> <exclude>**/IntTest*.java</exclude> </excludes> </configuration> </plugin> -->
+      <!-- ################################################################ -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <excludes>
             <exclude>**/*IntegrationTest.java</exclude>
+            <exclude>**/*FunctionalTest.java</exclude>
           </excludes>
+          <argLine>${jacoco.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
         </configuration>
         <executions>
           <execution>
-            <id>surefire-it</id>
-            <phase>integration-test</phase>
-            <goals>
-              <goal>test</goal>
-            </goals>
+            <id>default-test</id>
             <configuration>
-              <excludes>
-                <exclude>none</exclude>
-              </excludes>
-              <includes>
-                <include>**/*IntegrationTest.java</include>
-              </includes>
+              <skipTests>false</skipTests>
             </configuration>
           </execution>
         </executions>
@@ -253,6 +290,16 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <groupId>org.alfresco.maven.plugin</groupId>
+          <artifactId>alfresco-maven-plugin</artifactId>
+          <version>${maven.alfresco.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <verbose>false</verbose>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven.compiler.version}</version>
@@ -261,8 +308,10 @@
             <target>${java.target.version}</target>
           </configuration>
         </plugin>
-        
+
+        <!-- ####################################### -->
         <!-- also clean out local jar file in tomcat -->
+        <!-- ####################################### -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
@@ -281,8 +330,10 @@
             </filesets>
           </configuration>
         </plugin>
-        
+
+        <!-- ######################################### -->
         <!-- Copy dependency jar files to local tomcat -->
+        <!-- ######################################### -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
@@ -404,11 +455,86 @@
           <artifactId>jrebel-maven-plugin</artifactId>
           <version>1.1.3</version>
         </plugin>
+
+        <!-- ############################################################################ -->
+        <!-- Here we define the failsafe plugin to run our integration & functional tests -->
+        <!-- ############################################################################ -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${maven.failsafe.version}</version>
+          <configuration>
+            <skipTests>true</skipTests>
+            <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+          </configuration>
+          <executions>
+            <execution>
+              <id>integration-test</id>
+              <phase>test</phase>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+              <configuration>
+                <argLine>${jacoco-it.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
+                <excludes>
+                  <exclude>**/*FunctionalTest.java</exclude>
+                </excludes>
+                <includes>
+                  <include>**/*IntegrationTest.java</include>
+                </includes>
+              </configuration>
+            </execution>
+            <execution>
+              <id>functional-test</id>
+              <phase>integration-test</phase>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+              <configuration>
+                <argLine>${jacoco-ft.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
+                <excludes>
+                  <exclude>**/*IntegrationTest.java</exclude>
+                </excludes>
+                <includes>
+                  <include>**/*FunctionalTest.java</include>
+                </includes>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <dependencies>
+            <dependency>
+              <groupId>org.springframework</groupId>
+              <artifactId>spring-instrument-tomcat</artifactId>
+              <version>3.0.7.RELEASE</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <port>${tomcat.port}</port>
+            <extraResources>
+              <extraResource>
+                <directory>${project.build.testOutputDirectory}</directory>
+                <includes>
+                  <include>log4j.properties</include>
+                </includes>
+              </extraResource>
+            </extraResources>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
 
   <profiles>
+    <!-- ############################################### -->
+    <!-- profile to copy all code to the exploded tomcat -->
+    <!-- ############################################### -->
     <profile>
       <id>dev</id>
       <properties>
@@ -428,7 +554,7 @@
               </execution>
             </executions>
           </plugin>
-          
+
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <executions>
@@ -450,12 +576,12 @@
               </execution>
             </executions>
           </plugin>
-          
+
           <plugin>
             <groupId>org.zeroturnaround</groupId>
             <artifactId>jrebel-maven-plugin</artifactId>
           </plugin>
-          
+
           <plugin>
             <groupId>org.redpill-linpro.alfresco</groupId>
             <artifactId>refreshwebscripts-maven-plugin</artifactId>
@@ -478,148 +604,9 @@
       </build>
     </profile>
 
-    <!-- Enable AMP project packing on a WAR and run embedded in Jetty -->
-    <profile>
-      <id>my-test123</id>
-      <build>
-        <plugins>
-          <!-- Override surefire configuration to allow for integration testing -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven.surefire.version}</version>
-            <executions>
-              <execution>
-                <id>surefire-it</id>
-                <phase>integration-test</phase>
-                <goals>
-                  <goal>test</goal>
-                </goals>
-                <configuration>
-                  <excludes>
-                    <exclude>none</exclude>
-                  </excludes>
-                  <includes>
-                    <include>**/IntTest*.java</include>
-                  </includes>
-                </configuration>
-              </execution>
-            </executions>
-
-            <configuration>
-              <!-- <argLine>${app.testing.jvm.args}</argLine> -->
-              <additionalClasspathElements>
-                <!-- Adds the previously built ${app.amp.test.output.folder} to test classpath to enable module installation at test time -->
-                <additionalClasspathElement>${app.amp.test.output.folder}</additionalClasspathElement>
-                <additionalClasspathElement>${alfresco.client.war.folder}/WEB-INF/classes</additionalClasspathElement>
-              </additionalClasspathElements>
-            </configuration>
-          </plugin>
-
-          <!-- Fetch and unpack Alfresco Repository / Share in the target / folder -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>unpack-alfresco</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>unpack</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
-                  <artifactItems>
-                    <artifactItem>
-                      <groupId>${alfresco.groupId}</groupId>
-                      <artifactId>${alfresco.client.war}</artifactId>
-                      <type>war</type>
-                      <version>${alfresco.version}</version>
-                    </artifactItem>
-                  </artifactItems>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          
-          <!-- When the AMP runs locally, src/test/webapp and src/test/resources will contain -->
-          <!-- the location of the configuration files -->
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-alfresco-test-resources</id>
-                <phase>prepare-package</phase>
-                <goals>
-                  <goal>copy-resources</goal>
-                </goals>
-                <configuration>
-                  <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
-                  <resources>
-                    <resource>
-                      <directory>src/test/webapp</directory>
-                    </resource>
-                    <resource>
-                      <directory>${project.build.testOutputDirectory}</directory>
-                      <targetPath>WEB-INF/classes</targetPath>
-                      <filtering>${app.filtering.enabled}</filtering>
-                    </resource>
-                  </resources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          
-          <!-- The current AMP artifact is installed into the Alfresco folder using alfresco-maven-plugin -->
-          <plugin>
-            <groupId>org.alfresco.maven.plugin</groupId>
-            <artifactId>alfresco-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>amps-to-war-overlay</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>install</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          
-          <!-- If the integration-test phase is called, the integrated WAR + AMP is actually ran in Jetty -->
-          <plugin>
-            <groupId>org.mortbay.jetty</groupId>
-            <artifactId>maven-jetty-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>start-jetty</id>
-                <goals>
-                  <goal>run-exploded</goal>
-                </goals>
-                <phase>pre-integration-test</phase>
-                <configuration>
-
-                  <daemon>true</daemon>
-                  <webApp>${alfresco.client.war.folder}</webApp>
-                </configuration>
-              </execution>
-              <execution>
-                <id>stop-jetty</id>
-                <phase>post-integration-test</phase>
-                <goals>
-                  <goal>stop</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <stopPort>9991</stopPort>
-              <stopKey>test</stopKey>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
+    <!-- ####################################################################### -->
+    <!-- upload profile that uploads the artifact via CMIS to an Alfresco server -->
+    <!-- ####################################################################### -->
     <profile>
       <id>upload</id>
       <build>
@@ -627,7 +614,7 @@
           <plugin>
             <groupId>com.redpill-linpro.alfresco</groupId>
             <artifactId>artifact-upload-maven-plugin</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.3</version>
             <executions>
               <execution>
                 <id>artifact-upload</id>
@@ -650,6 +637,161 @@
         </plugins>
       </build>
     </profile>
+
+    <!-- ########################################################################## -->
+    <!-- code coverage profile that enables jacoco which creates nice code coverage -->
+    <!-- on integration tests too -->
+    <!-- ########################################################################## -->
+    <profile>
+      <id>jenkins</id>
+      <activation>
+        <property>
+          <name>env.BUILD_NUMBER</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
+              <execution>
+                <id>pre-unit-test</id>
+                <phase>generate-test-resources</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
+                  <propertyName>jacoco.agent.arg</propertyName>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>pre-integration-unit-test</id>
+                <phase>generate-test-resources</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                  <propertyName>jacoco-it.agent.arg</propertyName>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>pre-functional-test</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-ft.exec</destFile>
+                  <propertyName>jacoco-ft.agent.arg</propertyName>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>merge-all-tests</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>merge</goal>
+                </goals>
+                <configuration>
+                  <fileSets>
+                    <fileSet>
+                      <directory>${project.build.directory}/coverage-reports</directory>
+                      <includes>
+                        <include>*.exec</include>
+                      </includes>
+                      <excludes>
+                        <exclude>**/*-all.exec</exclude>
+                      </excludes>
+                    </fileSet>
+                  </fileSets>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-all.exec</destFile>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>report-all-tests</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <dataFile>${project.build.directory}/coverage-reports/jacoco-all.exec</dataFile>
+                  <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>it</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>integration-test</id>
+                <configuration>
+                  <skipTests>false</skipTests>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>ft</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>run-wars</id>
+                <phase>pre-integration-test</phase>
+                <configuration>
+                  <fork>true</fork>
+                </configuration>
+              </execution>
+              <execution>
+                <id>stop-tomcat</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>shutdown</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>functional-test</id>
+                <configuration>
+                  <skipTests>false</skipTests>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
   </profiles>
 
   <distributionManagement>
