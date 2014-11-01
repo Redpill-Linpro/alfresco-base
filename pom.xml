@@ -1,5 +1,4 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -21,10 +20,12 @@
     <alfresco.groupId>org.alfresco</alfresco.groupId>
     <alfresco.version>5.0-preview</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
-    <alfresco.data.location>alf_data_dev</alfresco.data.location>
-    <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
-    <!-- Defaults to a repository AMP -->
+    <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share. Defaults to repository AMP -->
     <alfresco.client.war>alfresco</alfresco.client.war>
+    <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
+    <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
+    <alfresco.data.location>alf_data_dev</alfresco.data.location>
+    <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
     <!-- This controls which properties will be picked in src/test/properties for embedded run -->
     <env>local</env>
     <tomcat.host>localhost</tomcat.host>
@@ -40,43 +41,22 @@
     <failsafe.argLine />
   </properties>
 
-  <developers>
-    <developer>
-      <id>marcus.svensson</id>
-      <name>Marcus Svensson</name>
-      <email>marcus.svensson (at) redpill-linpro.com</email>
-      <organization>Redpill Linpro AB</organization>
-      <organizationUrl>http://www.redpill-linpro.com</organizationUrl>
-      <roles>
-        <role>Founder</role>
-        <role>Architect</role>
-        <role>Developer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-    <developer>
-      <id>niklas.ekman</id>
-      <name>Niklas Ekman</name>
-      <email>niklas.ekman (at) redpill-linpro.com</email>
-      <organization>Redpill Linpro AB</organization>
-      <organizationUrl>http://www.redpill-linpro.com</organizationUrl>
-      <roles>
-        <role>Architect</role>
-        <role>Developer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
-
-  <contributors>
-    <contributor />
-  </contributors>
-
   <scm>
     <connection>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</connection>
     <developerConnection>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</developerConnection>
     <url>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</url>
   </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>redpill-linpro-releases</id>
+      <url>http://maven.redpill-linpro.com/nexus/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>redpill-linpro-snapshots</id>
+      <url>http://maven.redpill-linpro.com/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <issueManagement>
     <system>Git</system>
@@ -104,6 +84,14 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
+    <repository>
+      <id>alfresco-preview</id>
+      <url>https://artifacts.alfresco.com/nexus/content/repositories/5.0-preview</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </repository>
   </repositories>
 
   <pluginRepositories>
@@ -127,25 +115,18 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </pluginRepository>
+    <pluginRepository>
+      <id>alfresco-preview</id>
+      <url>https://artifacts.alfresco.com/nexus/content/repositories/5.0-preview</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+    </pluginRepository>
   </pluginRepositories>
 
-  <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution 
-    POM -->
-  <dependencies>
-    <!-- Test dependencies -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
   <dependencyManagement>
     <dependencies>
-      <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco version/edition (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) 
-        NOTE: You still need to define dependencies in your POM, but you can omit version as it's enforced by this dependencyManagement. NOTE: It defaults to the latest version this SDK pom has been tested with, 
-        but alfresco version can/should be overridden in your project's pom -->
       <dependency>
         <groupId>${alfresco.groupId}</groupId>
         <artifactId>alfresco-platform-distribution</artifactId>
@@ -153,28 +134,35 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
+      <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>alfresco-repository</artifactId>
+        <version>${alfresco.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>alfresco-remote-api</artifactId>
+        <version>${alfresco.version}</version>
+      </dependency>
+      <!-- Test dependencies -->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.11</version>
         <scope>test</scope>
       </dependency>
-
       <dependency>
         <groupId>org.jmock</groupId>
         <artifactId>jmock</artifactId>
         <version>2.6.0</version>
         <scope>test</scope>
       </dependency>
-
       <dependency>
         <groupId>org.jmock</groupId>
         <artifactId>jmock-legacy</artifactId>
         <version>2.6.0</version>
         <scope>test</scope>
       </dependency>
-
       <dependency>
         <groupId>org.jmock</groupId>
         <artifactId>jmock-junit4</artifactId>
@@ -183,6 +171,14 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
   <build>
     <finalName>${project.artifactId}-${project.version}</finalName>
@@ -803,18 +799,6 @@
         </plugins>
       </build>
     </profile>
-
   </profiles>
-
-  <distributionManagement>
-    <repository>
-      <id>redpill-linpro-releases</id>
-      <url>http://maven.redpill-linpro.com/nexus/content/repositories/releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>redpill-linpro-snapshots</id>
-      <url>http://maven.redpill-linpro.com/nexus/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
 
 </project>
