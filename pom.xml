@@ -37,8 +37,21 @@
     <jacoco.version>0.7.1.201405082137</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring.framework.version>3.0.5.RELEASE</spring.framework.version>
+    <spring.framework.version>3.2.10.RELEASE</spring.framework.version>
+    <postgresql.version>9.3-1102-jdbc41</postgresql.version>
     <failsafe.argLine />
+    
+    <!-- For integration test -->
+    <alfresco.db.host>localhost</alfresco.db.host>
+    <alfresco.db.port>5432</alfresco.db.port>
+    <alfresco.db.driver>org.postgresql.Driver</alfresco.db.driver>
+    <alfresco.db.datasource.class>org.postgresql.Driver</alfresco.db.datasource.class>
+    <alfresco.db.name>alfresco-ci</alfresco.db.name>
+    <alfresco.db.url>jdbc:postgresql://localhost:5432/${alfresco.db.name}</alfresco.db.url>  
+    <alfresco.db.controlurl>jdbc:postgresql://localhost:5432/postgres</alfresco.db.controlurl>  
+    <alfresco.db.username>alfresco</alfresco.db.username>
+    <alfresco.db.password>alfresco</alfresco.db.password>
+    
   </properties>
 
   <scm>
@@ -148,7 +161,7 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.11</version>
+        <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -169,6 +182,21 @@
         <version>2.6.0</version>
         <scope>test</scope>
       </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit-dep</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.framework.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -177,6 +205,11 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.framework.version}</version>
     </dependency>
   </dependencies>
 
@@ -297,6 +330,7 @@
 
     <pluginManagement>
       <plugins>
+      
         <plugin>
           <groupId>org.alfresco.maven.plugin</groupId>
           <artifactId>alfresco-maven-plugin</artifactId>
@@ -520,7 +554,7 @@
             <dependency>
               <groupId>org.springframework</groupId>
               <artifactId>spring-instrument-tomcat</artifactId>
-              <version>3.0.7.RELEASE</version>
+              <version>${spring.framework.version}</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -798,6 +832,76 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+
+    <profile>
+      <id>purge-postgres</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sql-maven-plugin</artifactId>
+            <version>1.5</version>
+
+            <dependencies>
+              <!-- specify the dependent jdbc driver here -->
+              <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+              </dependency>
+            </dependencies>
+
+            <!-- common configuration shared by all executions -->
+            <configuration>
+              <driver>${alfresco.db.datasource.class}</driver>
+              <url>${alfresco.db.controlurl}</url>
+              <username>${alfresco.db.username}</username>
+              <password>${alfresco.db.password}</password>
+              <!-- You can comment out username/password configurations and have maven to look them up in your settings.xml using ${settingsKey} -->
+              <settingsKey>sensibleKey</settingsKey>
+              <!--all executions are ignored if -Dmaven.test.skip=true -->
+              <skip>${maven.test.skip}</skip>
+            </configuration>
+
+            <executions>
+              <execution>
+                <id>drop-db-before-test-if-any</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <configuration>
+                  <!-- need another database to drop the targeted one -->
+                  <autocommit>true</autocommit>
+                  <sqlCommand>DROP DATABASE "${alfresco.db.name}";</sqlCommand>
+                  <!-- ignore error when database is not avaiable -->
+                  <onError>continue</onError>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>create-db</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <configuration>
+                  <!-- no transaction -->
+                  <autocommit>true</autocommit>
+                  <sqlCommand>CREATE DATABASE "${alfresco.db.name}" WITH OWNER = ${alfresco.db.username}
+       ENCODING = 'UTF8'
+       LC_COLLATE = 'en_US.UTF-8'
+       LC_CTYPE = 'en_US.UTF-8'
+       CONNECTION LIMIT = -1;</sqlCommand>
+                </configuration>
+              </execution>
+              
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+
     </profile>
   </profiles>
 
