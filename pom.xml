@@ -229,6 +229,7 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${spring.framework.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
