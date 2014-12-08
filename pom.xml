@@ -87,9 +87,9 @@
   </contributors>
 
   <scm>
-    <connection>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</connection>
-    <developerConnection>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</developerConnection>
-    <url>scm:git:git://git.redpill-linpro.com/alfresco-common/alfresco-base</url>
+    <connection>scm:git:git@github.com:Redpill-Linpro/alfresco-base.git</connection>
+    <developerConnection>scm:git:git@github.com:Redpill-Linpro/alfresco-base.git</developerConnection>
+    <url>scm:git:git@github.com:Redpill-Linpro/alfresco-base.git</url>
   </scm>
 
   <distributionManagement>
@@ -104,8 +104,8 @@
   </distributionManagement>
 
   <issueManagement>
-    <system>Git</system>
-    <url>https://localhost/issues</url>
+    <system>GitHub</system>
+    <url>https://github.com/Redpill-Linpro/alfresco-base/issues</url>
   </issueManagement>
 
   <repositories>
@@ -268,7 +268,7 @@
       <plugin>
         <groupId>org.redpill-linpro.alfresco</groupId>
         <artifactId>activate-enterprise-maven-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <executions>
           <execution>
             <id>activate-enterprise-build</id>
