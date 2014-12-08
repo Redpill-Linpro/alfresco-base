@@ -264,7 +264,8 @@
 
       <!-- ############################################################################ -->
       <!-- Plugin to add enterprise jars to dependency path if it's an enterprise build -->
-      <!-- ############################################################################ -->
+      <!-- ############################################################################ 
+      Does not work with 5.0
       <plugin>
         <groupId>org.redpill-linpro.alfresco</groupId>
         <artifactId>activate-enterprise-maven-plugin</artifactId>
@@ -279,7 +280,7 @@
           </execution>
         </executions>
       </plugin>
-
+      -->
       <!-- Use the jgitflow for enabling Git Flow release workflow -->
       <plugin>
         <groupId>com.atlassian.maven.plugins</groupId>
