@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.1.1.6</version>
+  <version>1.1.1.7-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -19,7 +19,7 @@
   <!-- | SDK properties have sensible defaults in the SDK parent, | but you can override the properties below to use another version. | For more available properties see the alfresco-sdk-parent POM. -->
   <properties>
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>4.2.2</alfresco.version>
+    <alfresco.version>4.2.3.3</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
     <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
@@ -29,8 +29,8 @@
     <env>local</env>
     <tomcat.host>localhost</tomcat.host>
     <tomcat.port>8080</tomcat.port>
-    <java.source.version>1.6</java.source.version>
-    <java.target.version>1.6</java.target.version>
+    <java.source.version>1.7</java.source.version>
+    <java.target.version>1.7</java.target.version>
     <maven.failsafe.version>2.17</maven.failsafe.version>
     <maven.tomcat.version>2.2</maven.tomcat.version>
     <jacoco.version>0.7.1.201405082137</jacoco.version>
@@ -129,8 +129,7 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution 
-    POM -->
+  <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution POM -->
   <dependencies>
     <!-- Test dependencies -->
     <dependency>
@@ -143,9 +142,8 @@
   <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
   <dependencyManagement>
     <dependencies>
-      <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco version/edition (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) 
-        NOTE: You still need to define dependencies in your POM, but you can omit version as it's enforced by this dependencyManagement. NOTE: It defaults to the latest version this SDK pom has been tested with, 
-        but alfresco version can/should be overridden in your project's pom -->
+      <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco version/edition (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) NOTE: You still need to define dependencies in your POM, but you can omit 
+        version as it's enforced by this dependencyManagement. NOTE: It defaults to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom -->
       <dependency>
         <groupId>${alfresco.groupId}</groupId>
         <artifactId>alfresco-platform-distribution</artifactId>
@@ -607,6 +605,17 @@
                 </goals>
                 <configuration>
                   <url>http://${tomcat.host}:${tomcat.port}/${alfresco.client.war}/service/index</url>
+                  <password>admin</password>
+                </configuration>
+              </execution>
+              <execution>
+                <id>cache</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>refresh</goal>
+                </goals>
+                <configuration>
+                  <url>http://${tomcat.host}:${tomcat.port}/${alfresco.client.war}/page/caches/dependency/clear</url>
                   <password>admin</password>
                 </configuration>
               </execution>
