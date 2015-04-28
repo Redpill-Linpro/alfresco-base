@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.1.1.9</version>
+  <version>1.1.1.10-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
