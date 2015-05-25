@@ -503,7 +503,7 @@
                 <goal>verify</goal>
               </goals>
               <configuration>
-                <argLine>${jacoco-ft.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
+                <argLine>${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
                 <excludes>
                   <exclude>**/*IntegrationTest.java</exclude>
                 </excludes>
