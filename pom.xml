@@ -679,7 +679,7 @@
             <executions>
               <execution>
                 <id>pre-unit-test</id>
-                <phase>generate-test-resources</phase>
+                <phase>initialize</phase>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
@@ -691,7 +691,7 @@
 
               <execution>
                 <id>pre-integration-unit-test</id>
-                <phase>generate-test-resources</phase>
+                <phase>initialize</phase>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
@@ -703,7 +703,7 @@
 
               <execution>
                 <id>pre-functional-test</id>
-                <phase>pre-integration-test</phase>
+                <phase>initialize</phase>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
@@ -715,7 +715,7 @@
 
               <execution>
                 <id>merge-all-tests</id>
-                <phase>post-integration-test</phase>
+                <phase>verify</phase>
                 <goals>
                   <goal>merge</goal>
                 </goals>
@@ -737,7 +737,7 @@
 
               <execution>
                 <id>report-all-tests</id>
-                <phase>post-integration-test</phase>
+                <phase>verify</phase>
                 <goals>
                   <goal>report</goal>
                 </goals>
