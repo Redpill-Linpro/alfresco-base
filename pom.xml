@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.1.1.10</version>
+  <version>1.1.1.11</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -21,7 +21,7 @@
     <alfresco.groupId>org.alfresco</alfresco.groupId>
     <alfresco.version>4.2.e</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
-    <alfresco.data.location>${project.build.directory}/alf_data_dev</alfresco.data.location>
+    <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
     <!-- Defaults to a repository AMP -->
     <alfresco.client.war>alfresco</alfresco.client.war>
