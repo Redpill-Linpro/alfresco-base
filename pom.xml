@@ -21,7 +21,7 @@
     <alfresco.groupId>org.alfresco</alfresco.groupId>
     <alfresco.version>4.2.e</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
-    <alfresco.data.location>${project.build.directory}/alf_data_dev</alfresco.data.location>
+    <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share -->
     <!-- Defaults to a repository AMP -->
     <alfresco.client.war>alfresco</alfresco.client.war>
