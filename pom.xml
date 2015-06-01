@@ -1,4 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -9,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -18,30 +19,38 @@
   <!-- | SDK properties have sensible defaults in the SDK parent, | but you can override the properties below to use another version. | For more available properties see the alfresco-sdk-parent POM. -->
   <properties>
     <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>5.0.0.3</alfresco.version>
+    <alfresco.version>5.0.d</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share. Defaults to repository AMP -->
     <alfresco.client.war>alfresco</alfresco.client.war>
     <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
     <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
     <alfresco.data.location>alf_data_dev</alfresco.data.location>
-    <alfresco.repo.url>http://localhost:8080/alfresco</alfresco.repo.url>
     <!-- This controls which properties will be picked in src/test/properties for embedded run -->
     <env>local</env>
     <tomcat.host>localhost</tomcat.host>
     <tomcat.port>8080</tomcat.port>
     <java.source.version>1.7</java.source.version>
     <java.target.version>1.7</java.target.version>
-    <maven.failsafe.version>2.17</maven.failsafe.version>
-    <maven.tomcat.version>2.2</maven.tomcat.version>
-    <jacoco.version>0.7.1.201405082137</jacoco.version>
+    <maven.failsafe.version>2.18.1</maven.failsafe.version>
+    <maven.cargo.version>1.4.14</maven.cargo.version>
+    <cargo.tomcat.version>7.0.53</cargo.tomcat.version>
+    <cargo.container.timeout>300000</cargo.container.timeout>
+    <cargo.jvmargs.extra1>-Xmx3g -XX:MaxPermSize=256m</cargo.jvmargs.extra1>
+    <cargo.jvmargs.extra2></cargo.jvmargs.extra2>
+    <!-- This version works with the currect jenkins jacoco plugin 1.0.19 -->
+    <jacoco.version>0.7.4.201502262128</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring.framework.version>3.2.10.RELEASE</spring.framework.version>
-    <postgresql.version>9.3-1102-jdbc41</postgresql.version>
+    <spring.framework.version>3.0.5.RELEASE</spring.framework.version>
+    <groovy.version>2.4.3</groovy.version>
+    <restassured.version>2.4.1</restassured.version>
+    <hamcrest.version>1.3</hamcrest.version>
+    <jmock.version>2.6.0</jmock.version>
     <failsafe.argLine />
 
     <!-- For integration test -->
+    <postgresql.version>9.3-1102-jdbc41</postgresql.version>
     <alfresco.db.host>localhost</alfresco.db.host>
     <alfresco.db.port>5432</alfresco.db.port>
     <alfresco.db.driver>org.postgresql.Driver</alfresco.db.driver>
@@ -92,17 +101,6 @@
     <url>scm:git:git@github.com:Redpill-Linpro/alfresco-base.git</url>
   </scm>
 
-  <distributionManagement>
-    <repository>
-      <id>redpill-linpro-releases</id>
-      <url>http://maven.redpill-linpro.com/nexus/content/repositories/releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>redpill-linpro-snapshots</id>
-      <url>http://maven.redpill-linpro.com/nexus/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
-
   <issueManagement>
     <system>GitHub</system>
     <url>https://github.com/Redpill-Linpro/alfresco-base/issues</url>
@@ -111,7 +109,7 @@
   <repositories>
     <repository>
       <id>redpill-linpro</id>
-      <url>http://maven.redpill-linpro.com/nexus/content/groups/public</url>
+      <url>https://maven.redpill-linpro.com/nexus/content/groups/public</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -134,7 +132,7 @@
   <pluginRepositories>
     <pluginRepository>
       <id>redpill-linpro</id>
-      <url>http://maven.redpill-linpro.com/nexus/content/groups/public</url>
+      <url>https://maven.redpill-linpro.com/nexus/content/groups/public</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -183,34 +181,61 @@
         <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
+
       <dependency>
         <groupId>org.jmock</groupId>
         <artifactId>jmock</artifactId>
-        <version>2.6.0</version>
+        <version>${jmock.version}</version>
         <scope>test</scope>
       </dependency>
+
       <dependency>
         <groupId>org.jmock</groupId>
         <artifactId>jmock-legacy</artifactId>
-        <version>2.6.0</version>
+        <version>${jmock.version}</version>
         <scope>test</scope>
       </dependency>
+
       <dependency>
         <groupId>org.jmock</groupId>
         <artifactId>jmock-junit4</artifactId>
-        <version>2.6.0</version>
+        <version>${jmock.version}</version>
         <scope>test</scope>
       </dependency>
+
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>${groovy.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <version>${hamcrest.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-core</artifactId>
+        <version>${hamcrest.version}</version>
+        <scope>test</scope>
+      </dependency>
+
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit-dep</artifactId>
         <version>${junit.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
         <version>${spring.framework.version}</version>
       </dependency>
+
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-test</artifactId>
@@ -219,6 +244,7 @@
     </dependencies>
   </dependencyManagement>
 
+  <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution POM -->
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -262,30 +288,11 @@
         </executions>
       </plugin>
 
-      <!-- ############################################################################ -->
-      <!-- Plugin to add enterprise jars to dependency path if it's an enterprise build -->
-      <!-- ############################################################################ 
-      Does not work with 5.0
-      <plugin>
-        <groupId>org.redpill-linpro.alfresco</groupId>
-        <artifactId>activate-enterprise-maven-plugin</artifactId>
-        <version>1.0.1</version>
-        <executions>
-          <execution>
-            <id>activate-enterprise-build</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>activate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      -->
       <!-- Use the jgitflow for enabling Git Flow release workflow -->
       <plugin>
-        <groupId>com.atlassian.maven.plugins</groupId>
-        <artifactId>maven-jgitflow-plugin</artifactId>
-        <version>1.0-alpha27</version>
+        <groupId>com.amashchenko.maven.plugin</groupId>
+        <artifactId>gitflow-maven-plugin</artifactId>
+        <version>1.0.8</version>
         <configuration>
           <!-- see goals wiki page for configuration options -->
         </configuration>
@@ -351,7 +358,6 @@
 
     <pluginManagement>
       <plugins>
-
         <plugin>
           <groupId>org.alfresco.maven.plugin</groupId>
           <artifactId>alfresco-maven-plugin</artifactId>
@@ -529,10 +535,6 @@
           <configuration>
             <skipTests>true</skipTests>
             <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-            <additionalClasspathElements>
-              <!-- Adds both the module config to test classpath -->
-              <additionalClasspathElement>${project.build.directory}/${project.build.finalName}/config</additionalClasspathElement>
-            </additionalClasspathElements>
           </configuration>
           <executions>
             <execution>
@@ -560,7 +562,11 @@
                 <goal>verify</goal>
               </goals>
               <configuration>
-                <argLine>${jacoco-ft.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
+                <systemPropertyVariables>
+                  <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
+                  <cargo.rmi.port>${cargo.rmi.port}</cargo.rmi.port>
+                </systemPropertyVariables>
+                <argLine>${failsafe.argLine} -Xms256m -Xmx1G -XX:PermSize=512m</argLine>
                 <excludes>
                   <exclude>**/*IntegrationTest.java</exclude>
                 </excludes>
@@ -736,7 +742,7 @@
             <executions>
               <execution>
                 <id>pre-unit-test</id>
-                <phase>generate-test-resources</phase>
+                <phase>initialize</phase>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
@@ -747,8 +753,8 @@
               </execution>
 
               <execution>
-                <id>pre-integration-unit-test</id>
-                <phase>generate-test-resources</phase>
+                <id>pre-integration-test</id>
+                <phase>initialize</phase>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
@@ -760,7 +766,7 @@
 
               <execution>
                 <id>pre-functional-test</id>
-                <phase>pre-integration-test</phase>
+                <phase>initialize</phase>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
@@ -769,10 +775,24 @@
                   <propertyName>jacoco-ft.agent.arg</propertyName>
                 </configuration>
               </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
 
+    <profile>
+      <id>report</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
               <execution>
                 <id>merge-all-tests</id>
-                <phase>post-integration-test</phase>
+                <phase>verify</phase>
                 <goals>
                   <goal>merge</goal>
                 </goals>
@@ -794,7 +814,7 @@
 
               <execution>
                 <id>report-all-tests</id>
-                <phase>post-integration-test</phase>
+                <phase>verify</phase>
                 <goals>
                   <goal>report</goal>
                 </goals>
@@ -804,7 +824,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>
+          </plugin>        
         </plugins>
       </build>
     </profile>
@@ -831,25 +851,61 @@
 
     <profile>
       <id>ft</id>
+
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <version>${h2.version}</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>tk.skuro.alfresco</groupId>
+          <artifactId>h2-support</artifactId>
+          <version>${h2-support.version}</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-instrument-tomcat</artifactId>
+          <version>3.0.7.RELEASE</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>${alfresco.client.war.groupId}</groupId>
+          <artifactId>${alfresco.client.war}</artifactId>
+          <type>war</type>
+          <version>${alfresco.client.war.version}</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+
       <build>
         <plugins>
           <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+          </plugin>
+
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+          </plugin>
+
+          <plugin>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-maven2-plugin</artifactId>
             <executions>
               <execution>
-                <id>run-wars</id>
-                <phase>pre-integration-test</phase>
-                <configuration>
-                  <fork>true</fork>
-                </configuration>
+                <id>start-tomcat</id>
               </execution>
               <execution>
                 <id>stop-tomcat</id>
-                <phase>post-integration-test</phase>
-                <goals>
-                  <goal>shutdown</goal>
-                </goals>
               </execution>
             </executions>
           </plugin>
@@ -940,5 +996,16 @@
 
     </profile>
   </profiles>
+
+  <distributionManagement>
+    <repository>
+      <id>redpill-linpro-releases</id>
+      <url>https://maven.redpill-linpro.com/nexus/content/repositories/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>redpill-linpro-snapshots</id>
+      <url>https://maven.redpill-linpro.com/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 
 </project>
