@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.1.1.13</version>
+  <version>1.1.1.14</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -162,6 +162,33 @@
         <version>${alfresco.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>alfresco-repository</artifactId>
+        <version>${alfresco.version}</version>
+        <scope>provided</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>${alfresco.groupId}</groupId>
+        <artifactId>alfresco-repository</artifactId>
+        <version>${alfresco.version}</version>
+        <classifier>config</classifier>
+        <scope>provided</scope>
+        <exclusions>
+          <exclusion>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
 
       <dependency>
@@ -859,28 +886,12 @@
         <dependency>
           <groupId>${alfresco.groupId}</groupId>
           <artifactId>alfresco-repository</artifactId>
-          <version>${alfresco.version}</version>
-          <scope>provided</scope>
-          <exclusions>
-            <exclusion>
-              <groupId>org.codehaus.groovy</groupId>
-              <artifactId>groovy-all</artifactId>
-            </exclusion>
-          </exclusions>
         </dependency>
 
         <dependency>
           <groupId>${alfresco.groupId}</groupId>
           <artifactId>alfresco-repository</artifactId>
-          <version>${alfresco.version}</version>
           <classifier>config</classifier>
-          <scope>provided</scope>
-          <exclusions>
-            <exclusion>
-              <groupId>org.codehaus.groovy</groupId>
-              <artifactId>groovy-all</artifactId>
-            </exclusion>
-          </exclusions>
         </dependency>
       </dependencies>
 
