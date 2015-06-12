@@ -1203,12 +1203,12 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <configuration>
-              <skipTests>${ft.skip}</skipTests>
-            </configuration>
             <executions>
               <execution>
                 <id>functional-test</id>
+                <configuration>
+                  <skipTests>${ft.skip}</skipTests>
+                </configuration>
               </execution>
             </executions>
           </plugin>
