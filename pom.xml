@@ -50,6 +50,8 @@
     <!-- Function tests should be skipped by default. Each module which need to run those -->
     <!-- has to add this property to itself. -->
     <ft.skip>true</ft.skip>
+    <!-- Version of postgresql client if used -->
+    <postgresql.version>9.3-1102-jdbc41</postgresql.version>
   </properties>
 
   <developers>
@@ -858,7 +860,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>        
+          </plugin>
         </plugins>
       </build>
     </profile>
@@ -891,6 +893,13 @@
           <groupId>com.h2database</groupId>
           <artifactId>h2</artifactId>
           <version>${h2.version}</version>
+          <scope>test</scope>
+        </dependency>
+
+        <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <version>${postgresql.version}</version>
           <scope>test</scope>
         </dependency>
 
@@ -1101,7 +1110,7 @@
               </executions>
             </plugin>
 
-            <!-- the cargo plugin launches the actual  -->
+            <!-- the cargo plugin launches the actual -->
             <plugin>
               <groupId>org.codehaus.cargo</groupId>
               <artifactId>cargo-maven2-plugin</artifactId>
@@ -1125,6 +1134,10 @@
                     <dependency>
                       <groupId>com.h2database</groupId>
                       <artifactId>h2</artifactId>
+                    </dependency>
+                    <dependency>
+                      <groupId>org.postgresql</groupId>
+                      <artifactId>postgresql</artifactId>
                     </dependency>
                     <dependency>
                       <groupId>tk.skuro.alfresco</groupId>
@@ -1241,7 +1254,7 @@
         </plugins>
       </build>
     </profile>
-    
+
     <profile>
       <id>purge-postgres</id>
       <build>
@@ -1316,7 +1329,6 @@
       <id>postgres</id>
       <properties>
         <!-- For integration test -->
-        <postgresql.version>9.3-1102-jdbc41</postgresql.version>
         <alfresco.db.host>localhost</alfresco.db.host>
         <alfresco.db.port>5432</alfresco.db.port>
         <alfresco.db.driver>org.postgresql.Driver</alfresco.db.driver>
@@ -1333,7 +1345,7 @@
           <groupId>org.postgresql</groupId>
           <artifactId>postgresql</artifactId>
           <version>${postgresql.version}</version>
-          <scope>provided</scope>
+          <scope>test</scope>
         </dependency>
       </dependencies>
     </profile>
