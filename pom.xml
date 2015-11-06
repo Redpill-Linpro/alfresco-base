@@ -611,29 +611,6 @@
             </execution>
           </executions>
         </plugin>
-
-        <plugin>
-          <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat7-maven-plugin</artifactId>
-          <dependencies>
-            <dependency>
-              <groupId>org.springframework</groupId>
-              <artifactId>spring-instrument-tomcat</artifactId>
-              <version>3.0.7.RELEASE</version>
-            </dependency>
-          </dependencies>
-          <configuration>
-            <port>${tomcat.port}</port>
-            <extraResources>
-              <extraResource>
-                <directory>${project.build.testOutputDirectory}</directory>
-                <includes>
-                  <include>log4j.properties</include>
-                </includes>
-              </extraResource>
-            </extraResources>
-          </configuration>
-        </plugin>
       </plugins>
     </pluginManagement>
   </build>
@@ -885,15 +862,7 @@
 
     <profile>
       <id>ft</id>
-
       <dependencies>
-        <dependency>
-          <groupId>com.h2database</groupId>
-          <artifactId>h2</artifactId>
-          <version>${h2.version}</version>
-          <scope>test</scope>
-        </dependency>
-
         <dependency>
           <groupId>org.postgresql</groupId>
           <artifactId>postgresql</artifactId>
@@ -902,16 +871,9 @@
         </dependency>
 
         <dependency>
-          <groupId>tk.skuro.alfresco</groupId>
-          <artifactId>h2-support</artifactId>
-          <version>${h2-support.version}</version>
-          <scope>test</scope>
-        </dependency>
-
-        <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-instrument-tomcat</artifactId>
-          <version>3.0.7.RELEASE</version>
+          <version>3.2.10.RELEASE</version>
           <scope>test</scope>
         </dependency>
 
@@ -927,13 +889,6 @@
           <groupId>${alfresco.groupId}</groupId>
           <artifactId>alfresco-repository</artifactId>
           <version>${alfresco.version}</version>
-        </dependency>
-
-        <dependency>
-          <groupId>${alfresco.groupId}</groupId>
-          <artifactId>alfresco-repository</artifactId>
-          <version>${alfresco.version}</version>
-          <classifier>config</classifier>
         </dependency>
       </dependencies>
 
@@ -955,7 +910,7 @@
                     <goal>unpack</goal>
                   </goals>
                   <configuration>
-                    <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
+                    <outputDirectory>${app.amp.client.war.folder}</outputDirectory>
                     <artifactItems>
                       <artifactItem>
                         <groupId>${alfresco.client.war.groupId}</groupId>
@@ -974,7 +929,7 @@
                     <goal>copy-dependencies</goal>
                   </goals>
                   <configuration>
-                    <outputDirectory>${alfresco.client.war.folder}/WEB-INF/lib</outputDirectory>
+                    <outputDirectory>${app.amp.client.war.folder}/WEB-INF/lib</outputDirectory>
                     <overWriteReleases>false</overWriteReleases>
                     <overWriteSnapshots>false</overWriteSnapshots>
                     <overWriteIfNewer>true</overWriteIfNewer>
@@ -1003,7 +958,7 @@
                     <goal>copy-resources</goal>
                   </goals>
                   <configuration>
-                    <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
+                    <outputDirectory>${app.amp.client.war.folder}</outputDirectory>
                     <resources>
                       <resource>
                         <directory>src/test/webapp</directory>
@@ -1032,7 +987,7 @@
                     <goal>copy-resources</goal>
                   </goals>
                   <configuration>
-                    <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
+                    <outputDirectory>${app.amp.client.war.folder}</outputDirectory>
                     <resources>
                       <!-- if it's a JAR project this is the file that gets copied -->
                       <resource>
@@ -1064,7 +1019,7 @@
                     <goal>copy-resources</goal>
                   </goals>
                   <configuration>
-                    <outputDirectory>${alfresco.client.war.folder}</outputDirectory>
+                    <outputDirectory>${app.amp.client.war.folder}</outputDirectory>
                     <resources>
                       <resource>
                         <directory>tomcat</directory>
@@ -1130,16 +1085,8 @@
                   </systemProperties>
                   <dependencies>
                     <dependency>
-                      <groupId>com.h2database</groupId>
-                      <artifactId>h2</artifactId>
-                    </dependency>
-                    <dependency>
                       <groupId>org.postgresql</groupId>
                       <artifactId>postgresql</artifactId>
-                    </dependency>
-                    <dependency>
-                      <groupId>tk.skuro.alfresco</groupId>
-                      <artifactId>h2-support</artifactId>
                     </dependency>
                     <dependency>
                       <groupId>org.springframework</groupId>
@@ -1154,7 +1101,7 @@
                     <groupId>${alfresco.client.war.groupId}</groupId>
                     <artifactId>${alfresco.client.war}</artifactId>
                     <type>war</type>
-                    <location>${alfresco.client.war.folder}</location>
+                    <location>${app.amp.client.war.folder}</location>
                     <properties>
                       <context>alfresco</context>
                     </properties>
