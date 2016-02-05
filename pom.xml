@@ -21,12 +21,11 @@
     <alfresco.groupId>org.alfresco</alfresco.groupId>
     <alfresco.version>5.0.d</alfresco.version>
     <app.log.root.level>WARN</app.log.root.level>
-    <alfresco.data.location>alf_data_dev</alfresco.data.location>
     <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share. Defaults to repository AMP -->
     <alfresco.client.war>alfresco</alfresco.client.war>
     <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
     <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
-    <alfresco.data.location>alf_data_dev</alfresco.data.location>
+    <alfresco.data.location>./alf_data_dev</alfresco.data.location>
     <!-- This controls which properties will be picked in src/test/properties for embedded run -->
     <env>local</env>
     <tomcat.host>localhost</tomcat.host>
@@ -55,17 +54,7 @@
     <!-- has to add this property to itself. -->
     <ft.skip>true</ft.skip>
 
-    <!-- For integration test -->
-    <postgresql.version>9.3-1102-jdbc41</postgresql.version>
-    <alfresco.db.host>localhost</alfresco.db.host>
-    <alfresco.db.port>5432</alfresco.db.port>
-    <alfresco.db.driver>org.postgresql.Driver</alfresco.db.driver>
-    <alfresco.db.datasource.class>org.postgresql.Driver</alfresco.db.datasource.class>
-    <alfresco.db.name>alfresco-ci</alfresco.db.name>
-    <alfresco.db.url>jdbc:postgresql://localhost:5432/${alfresco.db.name}</alfresco.db.url>
-    <alfresco.db.controlurl>jdbc:postgresql://localhost:5432/postgres</alfresco.db.controlurl>
-    <alfresco.db.username>alfresco</alfresco.db.username>
-    <alfresco.db.password>alfresco</alfresco.db.password>
+    
 
   </properties>
 
@@ -161,8 +150,13 @@
   <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
   <dependencyManagement>
     <dependencies>
-      <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco version/edition (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) NOTE: You still need to define dependencies in your POM, but you can omit 
-        version as it's enforced by this dependencyManagement. NOTE: It defaults to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom -->
+      <dependency>
+        <groupId>org.alfresco</groupId>
+        <artifactId>alfresco-repository</artifactId>
+        <version>${alfresco.version}</version>
+        <classifier>h2scripts</classifier>
+        <scope>test</scope>
+      </dependency>
       <dependency>
         <groupId>${alfresco.groupId}</groupId>
         <artifactId>alfresco-platform-distribution</artifactId>
@@ -835,7 +829,7 @@
                 </configuration>
               </execution>
             </executions>
-          </plugin>        
+          </plugin>
         </plugins>
       </build>
     </profile>
@@ -863,12 +857,7 @@
     <profile>
       <id>ft</id>
       <dependencies>
-        <dependency>
-          <groupId>org.postgresql</groupId>
-          <artifactId>postgresql</artifactId>
-          <version>${postgresql.version}</version>
-          <scope>test</scope>
-        </dependency>
+        
 
         <dependency>
           <groupId>org.springframework</groupId>
@@ -1063,7 +1052,7 @@
               </executions>
             </plugin>
 
-            <!-- the cargo plugin launches the actual  -->
+            <!-- the cargo plugin launches the actual -->
             <plugin>
               <groupId>org.codehaus.cargo</groupId>
               <artifactId>cargo-maven2-plugin</artifactId>
@@ -1084,10 +1073,7 @@
                     <dir.root>${alfresco.data.location}</dir.root>
                   </systemProperties>
                   <dependencies>
-                    <dependency>
-                      <groupId>org.postgresql</groupId>
-                      <artifactId>postgresql</artifactId>
-                    </dependency>
+                    
                     <dependency>
                       <groupId>org.springframework</groupId>
                       <artifactId>spring-instrument-tomcat</artifactId>
@@ -1200,76 +1186,7 @@
       </build>
     </profile>
 
-    <profile>
-      <id>purge-postgres</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>sql-maven-plugin</artifactId>
-            <version>1.5</version>
-
-            <dependencies>
-              <!-- specify the dependent jdbc driver here -->
-              <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
-              </dependency>
-            </dependencies>
-
-            <!-- common configuration shared by all executions -->
-            <configuration>
-              <driver>${alfresco.db.datasource.class}</driver>
-              <url>${alfresco.db.controlurl}</url>
-              <username>${alfresco.db.username}</username>
-              <password>${alfresco.db.password}</password>
-              <!-- You can comment out username/password configurations and have maven to look them up in your settings.xml using ${settingsKey} -->
-              <settingsKey>sensibleKey</settingsKey>
-              <!--all executions are ignored if -Dmaven.test.skip=true -->
-              <skip>${maven.test.skip}</skip>
-            </configuration>
-
-            <executions>
-              <execution>
-                <id>drop-db-before-test-if-any</id>
-                <phase>process-test-resources</phase>
-                <goals>
-                  <goal>execute</goal>
-                </goals>
-                <configuration>
-                  <!-- need another database to drop the targeted one -->
-                  <autocommit>true</autocommit>
-                  <sqlCommand>DROP DATABASE "${alfresco.db.name}";</sqlCommand>
-                  <!-- ignore error when database is not avaiable -->
-                  <onError>continue</onError>
-                </configuration>
-              </execution>
-
-              <execution>
-                <id>create-db</id>
-                <phase>process-test-resources</phase>
-                <goals>
-                  <goal>execute</goal>
-                </goals>
-                <configuration>
-                  <!-- no transaction -->
-                  <autocommit>true</autocommit>
-                  <sqlCommand>CREATE DATABASE "${alfresco.db.name}" WITH OWNER = ${alfresco.db.username}
-                    ENCODING = 'UTF8'
-                    LC_COLLATE = 'en_US.UTF-8'
-                    LC_CTYPE = 'en_US.UTF-8'
-                    CONNECTION LIMIT = -1
-                    TEMPLATE template0;</sqlCommand>
-                </configuration>
-              </execution>
-
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-
-    </profile>
+    
   </profiles>
 
   <distributionManagement>
