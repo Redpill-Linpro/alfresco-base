@@ -43,7 +43,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spring.framework.version>3.2.10.RELEASE</spring.framework.version>
-    <groovy.version>2.4.3</groovy.version>
+    <groovy.version>2.4.4</groovy.version>
     <restassured.version>2.4.1</restassured.version>
     <hamcrest.version>1.3</hamcrest.version>
     <jmock.version>2.6.0</jmock.version>
@@ -155,7 +155,6 @@
         <artifactId>alfresco-repository</artifactId>
         <version>${alfresco.version}</version>
         <classifier>h2scripts</classifier>
-        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>${alfresco.groupId}</groupId>
@@ -253,7 +252,7 @@
         <groupId>com.jayway.restassured</groupId>
         <artifactId>rest-assured</artifactId>
         <version>${restassured.version}</version>
-        <scope>test</scope>
+
         <exclusions>
           <exclusion>
             <groupId>org.codehaus.groovy</groupId>
@@ -285,6 +284,11 @@
       <version>${spring.framework.version}</version>
       <scope>provided</scope>
     </dependency>
+   		<dependency>
+		<groupId>com.h2database</groupId>
+		<artifactId>h2</artifactId>
+		<scope>provided</scope>
+	</dependency>
   </dependencies>
 
   <build>
@@ -858,7 +862,25 @@
       <id>ft</id>
       <dependencies>
         
-
+<dependency>
+      <groupId>com.jayway.restassured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>${restassured.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy-xml</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.groovy</groupId>
+          <artifactId>groovy-json</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
         <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-instrument-tomcat</artifactId>
@@ -879,6 +901,13 @@
           <artifactId>alfresco-repository</artifactId>
           <version>${alfresco.version}</version>
         </dependency>
+<dependency>
+        <groupId>org.alfresco</groupId>
+        <artifactId>alfresco-repository</artifactId>
+        <version>${alfresco.version}</version>
+        <classifier>h2scripts</classifier>
+      </dependency>
+     
       </dependencies>
 
       <build>
@@ -922,7 +951,7 @@
                     <overWriteReleases>false</overWriteReleases>
                     <overWriteSnapshots>false</overWriteSnapshots>
                     <overWriteIfNewer>true</overWriteIfNewer>
-                    <includeScope>runtime</includeScope>
+                    <includeScope>compile</includeScope>
                   </configuration>
                 </execution>
               </executions>
@@ -1078,6 +1107,11 @@
                       <groupId>org.springframework</groupId>
                       <artifactId>spring-instrument-tomcat</artifactId>
                     </dependency>
+                    <dependency>
+                      <groupId>com.h2database</groupId>
+                      <artifactId>h2</artifactId>
+                    </dependency>
+
                   </dependencies>
                 </container>
 
