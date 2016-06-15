@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>2.2.0</version>
+  <version>2.2.1</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -39,7 +39,7 @@
     <cargo.jvmargs.extra1>-Xmx3g -XX:MaxPermSize=256m</cargo.jvmargs.extra1>
     <cargo.jvmargs.extra2></cargo.jvmargs.extra2>
     <!-- This version works with the currect jenkins jacoco plugin 1.0.19 -->
-    <jacoco.version>0.7.4.201502262128</jacoco.version>
+    <jacoco.version>0.7.7.201606060606</jacoco.version>
     <jacoco.agent.arg/>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -56,7 +56,12 @@
     <ft.skip>true</ft.skip>
 
     
-
+    <!--SONAR-->
+    <sonar.sources>src/main</sonar.sources>
+    <!--<sonar.exclusions>**/*.xml, **/*.css</sonar.exclusions>-->
+    <sonar.jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-all.exec</sonar.jacoco.reportPath>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
   </properties>
 
   <developers>
@@ -152,7 +157,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.alfresco</groupId>
+        <groupId>${alfresco.groupId}</groupId>
         <artifactId>alfresco-repository</artifactId>
         <version>${alfresco.version}</version>
         <classifier>h2scripts</classifier>
