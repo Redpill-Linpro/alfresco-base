@@ -38,7 +38,7 @@
     <cargo.jvmargs.extra1>-Xmx3g -XX:MaxPermSize=256m</cargo.jvmargs.extra1>
     <cargo.jvmargs.extra2></cargo.jvmargs.extra2>
     <!-- This version works with the currect jenkins jacoco plugin 1.0.19 -->
-    <jacoco.version>0.7.4.201502262128</jacoco.version>
+    <jacoco.version>0.7.7.201606060606</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spring.framework.version>3.0.5.RELEASE</spring.framework.version>
@@ -53,13 +53,20 @@
     <ft.skip>true</ft.skip>
     <!-- Version of postgresql client if used -->
     <postgresql.version>9.3-1102-jdbc41</postgresql.version>
+    
+    <!--SONAR-->
+    <sonar.sources>src/main</sonar.sources>
+    <!--<sonar.exclusions>**/*.xml, **/*.css</sonar.exclusions>-->
+    <sonar.jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-all.exec</sonar.jacoco.reportPath>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
   </properties>
 
   <developers>
     <developer>
-      <id>marcus.svensson</id>
-      <name>Marcus Svensson</name>
-      <email>marcus.svensson (at) redpill-linpro.com</email>
+      <id>mars</id>
+      <name>Marcus Svartmark</name>
+      <email>marcus.Svartmark (at) redpill-linpro.com</email>
       <organization>Redpill Linpro AB</organization>
       <organizationUrl>http://www.redpill-linpro.com</organizationUrl>
       <roles>
@@ -158,7 +165,7 @@
   <dependencyManagement>
     <dependencies>
       <!-- This will import the dependencyManagement for all artifacts in the selected Alfresco version/edition (see http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Importing_Dependencies) NOTE: You still need to define dependencies in your POM, but you can omit 
-        version as it's enforced by this dependencyManagement. NOTE: It defaults to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom -->
+      version as it's enforced by this dependencyManagement. NOTE: It defaults to the latest version this SDK pom has been tested with, but alfresco version can/should be overridden in your project's pom -->
       <dependency>
         <groupId>${alfresco.groupId}</groupId>
         <artifactId>alfresco-platform-distribution</artifactId>
