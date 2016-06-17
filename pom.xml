@@ -25,7 +25,7 @@
     <alfresco.client.war>alfresco</alfresco.client.war>
     <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
     <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
-<!--    <alfresco.data.location>./alf_data_dev</alfresco.data.location> //Causes problems with 5.1 all in one runner -->
+    <!--    <alfresco.data.location>./alf_data_dev</alfresco.data.location> //Causes problems with 5.1 all in one runner -->
     <!-- This controls which properties will be picked in src/test/properties for embedded run -->
     <env>local</env>
     <tomcat.host>localhost</tomcat.host>
@@ -290,11 +290,11 @@
       <version>${spring.framework.version}</version>
       <scope>provided</scope>
     </dependency>
-   		<dependency>
-		<groupId>com.h2database</groupId>
-		<artifactId>h2</artifactId>
-		<scope>provided</scope>
-	</dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -477,6 +477,12 @@
                 <resources>
                   <resource>
                     <directory>${project.build.directory}/${project.build.finalName}/lib</directory>
+                    <includes>
+                      <include>${project.build.finalName}.jar</include>
+                    </includes>
+                  </resource>
+                  <resource>
+                    <directory>${project.build.directory}/amp/lib</directory>
                     <includes>
                       <include>${project.build.finalName}.jar</include>
                     </includes>
@@ -868,25 +874,25 @@
       <id>ft</id>
       <dependencies>
         
-<dependency>
-      <groupId>com.jayway.restassured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>${restassured.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.codehaus.groovy</groupId>
-          <artifactId>groovy</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.codehaus.groovy</groupId>
-          <artifactId>groovy-xml</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.codehaus.groovy</groupId>
-          <artifactId>groovy-json</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+        <dependency>
+          <groupId>com.jayway.restassured</groupId>
+          <artifactId>rest-assured</artifactId>
+          <version>${restassured.version}</version>
+          <exclusions>
+            <exclusion>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-xml</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.codehaus.groovy</groupId>
+              <artifactId>groovy-json</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
         <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-instrument-tomcat</artifactId>
@@ -907,12 +913,12 @@
           <artifactId>alfresco-repository</artifactId>
           <version>${alfresco.version}</version>
         </dependency>
-<dependency>
-        <groupId>org.alfresco</groupId>
-        <artifactId>alfresco-repository</artifactId>
-        <version>${alfresco.version}</version>
-        <classifier>h2scripts</classifier>
-      </dependency>
+        <dependency>
+          <groupId>org.alfresco</groupId>
+          <artifactId>alfresco-repository</artifactId>
+          <version>${alfresco.version}</version>
+          <classifier>h2scripts</classifier>
+        </dependency>
      
       </dependencies>
 
@@ -1026,6 +1032,15 @@
                       <!-- if it's an AMP project this is the file that gets copied -->
                       <resource>
                         <directory>target/${project.artifactId}-${project.version}/lib</directory>
+                        <targetPath>WEB-INF/lib</targetPath>
+                        <includes>
+                          <include>${project.build.finalName}.jar</include>
+                        </includes>
+                        <filtering>false</filtering>
+                      </resource>
+                      
+                      <resource>
+                        <directory>${project.build.directory}/amp/lib</directory>
                         <targetPath>WEB-INF/lib</targetPath>
                         <includes>
                           <include>${project.build.finalName}.jar</include>
