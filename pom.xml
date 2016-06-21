@@ -60,7 +60,15 @@
     <sonar.jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-all.exec</sonar.jacoco.reportPath>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-  </properties>
+    <sonar.coverage.exclusions>
+      **/*.css,
+      **/*.ftl,
+      **/*.xml,
+      **/*.js
+    </sonar.coverage.exclusions>
+  
+
+</properties>
 
   <developers>
     <developer>
