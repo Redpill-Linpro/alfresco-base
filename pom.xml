@@ -37,6 +37,8 @@
     <cargo.container.timeout>300000</cargo.container.timeout>
     <cargo.jvmargs.extra1>-Xmx3g -XX:MaxPermSize=256m</cargo.jvmargs.extra1>
     <cargo.jvmargs.extra2></cargo.jvmargs.extra2>
+    <it.test.jvmargs>-Xms256m -Xmx2G -XX:PermSize=512m</it.test.jvmargs>
+    <ft.test.jvmargs>-Xms256m -Xmx2G -XX:PermSize=512m</ft.test.jvmargs>
     <!-- This version works with the currect jenkins jacoco plugin 1.0.19 -->
     <jacoco.version>0.7.7.201606060606</jacoco.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -597,7 +599,7 @@
                 <goal>verify</goal>
               </goals>
               <configuration>
-                <argLine>${jacoco-it.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
+                <argLine>${jacoco-it.agent.arg} ${failsafe.argLine} ${it.test.jvmargs}</argLine>
                 <excludes>
                   <exclude>**/*FunctionalTest.java</exclude>
                 </excludes>
@@ -618,7 +620,7 @@
                   <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
                   <cargo.rmi.port>${cargo.rmi.port}</cargo.rmi.port>
                 </systemPropertyVariables>
-                <argLine>${failsafe.argLine} -Xms256m -Xmx1G -XX:PermSize=512m</argLine>
+                <argLine>${failsafe.argLine} ${ft.test.jvmargs}</argLine>
                 <excludes>
                   <exclude>**/*IntegrationTest.java</exclude>
                 </excludes>
