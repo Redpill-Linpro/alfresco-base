@@ -85,3 +85,7 @@ This will look up settings of your local alfresco environment among your profile
         <tomcat.share.port>8081</tomcat.share.port>
       </properties>
     </profile>
+
+If you're using version 2.2.4 or later, remember to make sure you have the
+following line in your pom.xml:
+   <app.amp.client.war.artifactId>share</app.amp.client.war.artifactId>
