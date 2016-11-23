@@ -14,9 +14,12 @@
   <properties>
     <tomcat.host>localhost</tomcat.host>
     <tomcat.port>8080</tomcat.port>
-    <maven.failsafe.version></maven.failsafe.version>
+    <maven.failsafe.version>2.19.1</maven.failsafe.version>
+    <maven.surefire.version>2.19.1</maven.surefire.version>
     <failsafe.argLine />
     <jacoco.agent.arg />
+    
+
   </properties>
 
   <developers>
@@ -126,7 +129,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.19.1</version>
+        <version>${maven.surefire.version}</version>
         <configuration>
           <excludes>
             <exclude>**/*IntegrationTest.java</exclude>
@@ -139,6 +142,11 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>ft</id>
+      
+    </profile>
+    
     <profile>
       <!-- ############################################################################ -->
       <!-- Here we define our integration test features                                 -->
@@ -153,7 +161,7 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-failsafe-plugin</artifactId>
-
+              <version>${maven.failsafe.version}</version>
               <configuration>
                 <skipTests>true</skipTests>
                 <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
