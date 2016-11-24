@@ -22,6 +22,13 @@
     <failsafe.argLine />
     <jacoco.agent.arg />
     
+    <alfresco.db.name>alf_dev</alfresco.db.name>
+    <alfresco.db.username>alfresco</alfresco.db.username>
+    <alfresco.db.password>alfresco</alfresco.db.password>
+    <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0</alfresco.db.params>
+    <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
+    <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
+    
     <!-- Below is the required properties from the Alfresco SDK -->
     <!-- Leaving them out works fine locally but does not when jenkins is used to build -->
     <!-- Alfresco Maven Plugin version to use -->
