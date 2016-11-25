@@ -18,9 +18,12 @@
     <maven.surefire.version>2.19.1</maven.surefire.version>
     <maven.cargo.version>1.4.14</maven.cargo.version>
     <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
+    <jacoco.version>0.7.7.201606060606</jacoco.version>
     <h2.version>1.4.193</h2.version>
     <failsafe.argLine />
     <jacoco.agent.arg />
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     
     <alfresco.db.name>alf_dev</alfresco.db.name>
     <alfresco.db.username>alfresco</alfresco.db.username>
@@ -28,6 +31,19 @@
     <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0</alfresco.db.params>
     <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
     <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
+    
+    <!-- Sonar -->
+    <sonar.sources>src/main</sonar.sources>
+    <!--<sonar.exclusions>**/*.xml, **/*.css</sonar.exclusions>-->
+    <sonar.jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-all.exec</sonar.jacoco.reportPath>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+    <sonar.coverage.exclusions>
+      **/*.css,
+      **/*.ftl,
+      **/*.xml,
+      **/*.js
+    </sonar.coverage.exclusions>
     
     
     <!-- Below is the required properties from the Alfresco SDK -->
@@ -919,6 +935,105 @@
                   <skipTests>${ft.skip}</skipTests>
                 </configuration>
               </execution> 
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+    <!-- ########################################################################## -->
+    <!-- code coverage profile that enables jacoco which creates nice code coverage -->
+    <!-- on integration tests too -->
+    <!-- ########################################################################## -->
+    <profile>
+      <id>jenkins</id>
+      <activation>
+        <property>
+          <name>env.BUILD_NUMBER</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
+              <execution>
+                <id>pre-unit-test</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
+                  <propertyName>jacoco.agent.arg</propertyName>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>pre-integration-test</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                  <propertyName>jacoco-it.agent.arg</propertyName>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>pre-functional-test</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-ft.exec</destFile>
+                  <propertyName>jacoco-ft.agent.arg</propertyName>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
+              <execution>
+                <id>merge-all-tests</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>merge</goal>
+                </goals>
+                <configuration>
+                  <fileSets>
+                    <fileSet>
+                      <directory>${project.build.directory}/coverage-reports</directory>
+                      <includes>
+                        <include>*.exec</include>
+                      </includes>
+                      <excludes>
+                        <exclude>**/*-all.exec</exclude>
+                      </excludes>
+                    </fileSet>
+                  </fileSets>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-all.exec</destFile>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>report-all-tests</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <dataFile>${project.build.directory}/coverage-reports/jacoco-all.exec</dataFile>
+                  <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+                </configuration>
+              </execution>
             </executions>
           </plugin>
         </plugins>
