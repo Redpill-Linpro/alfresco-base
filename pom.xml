@@ -994,13 +994,6 @@
                   <propertyName>jacoco-ft.agent.arg</propertyName>
                 </configuration>
               </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.version}</version>
-            <executions>
               <execution>
                 <id>merge-all-tests</id>
                 <phase>verify</phase>
