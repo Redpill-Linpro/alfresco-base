@@ -205,7 +205,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven.surefire.version}</version>
-        <configuration>
+	<configuration>
+	  <trimStackTrace>false</trimStackTrace>
+	  <useFile>false</useFile>
           <excludes>
             <exclude>**/*IntegrationTest.java</exclude>
             <exclude>**/*FunctionalTest.java</exclude>
@@ -437,7 +439,9 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-failsafe-plugin</artifactId>
               <version>${maven.failsafe.version}</version>
-              <configuration>
+	      <configuration>
+                <trimStackTrace>false</trimStackTrace>
+                <useFile>false</useFile>
                 <skipTests>true</skipTests>
                 <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
               </configuration>
@@ -578,7 +582,9 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-failsafe-plugin</artifactId>
               <version>${maven.failsafe.version}</version>
-              <configuration>
+	      <configuration>
+                <trimStackTrace>false</trimStackTrace>
+                <useFile>false</useFile>
                 <skipTests>true</skipTests>
                 <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
               </configuration>
