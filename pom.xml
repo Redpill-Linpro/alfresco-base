@@ -10,7 +10,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>1.1.1.24-SNAPSHOT</version>
+  <version>1.1.1.24</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -326,7 +326,7 @@
 
       <!-- ############################################################################ -->
       <!-- Plugin to add enterprise jars to dependency path if it's an enterprise build -->
-      <!-- ############################################################################ 
+      <!-- ############################################################################ -->
       <plugin>
         <groupId>org.redpill-linpro.alfresco</groupId>
         <artifactId>activate-enterprise-maven-plugin</artifactId>
@@ -340,7 +340,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>-->
+      </plugin>
 
 
       <!-- ################################################################ -->
