@@ -2,15 +2,9 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.alfresco.maven</groupId>
-    <artifactId>alfresco-sdk-parent</artifactId>
-    <version>2.2.0</version>
-  </parent>
-
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>2.2.4</version>
+  <version>2.9.0</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -18,45 +12,27 @@
 
   <!-- | SDK properties have sensible defaults in the SDK parent, | but you can override the properties below to use another version. | For more available properties see the alfresco-sdk-parent POM. -->
   <properties>
-    <alfresco.groupId>org.alfresco</alfresco.groupId>
-    <alfresco.version>5.1.e</alfresco.version>
-    <app.log.root.level>WARN</app.log.root.level>
-    <!-- Defines the target WAR for this AMP. Allowed values: alfresco | share. Defaults to repository AMP -->
-    <alfresco.client.war>alfresco</alfresco.client.war>
-    <alfresco.client.war.groupId>${alfresco.groupId}</alfresco.client.war.groupId>
-    <alfresco.client.war.version>${alfresco.version}</alfresco.client.war.version>
-    <!--    <alfresco.data.location>./alf_data_dev</alfresco.data.location> //Causes problems with 5.1 all in one runner -->
-    <!-- This controls which properties will be picked in src/test/properties for embedded run -->
-    <env>local</env>
     <tomcat.host>localhost</tomcat.host>
     <tomcat.port>8080</tomcat.port>
-    <java.source.version>1.8</java.source.version>
-    <java.target.version>1.8</java.target.version>
-    <maven.failsafe.version>2.18.1</maven.failsafe.version>
+    <maven.failsafe.version>2.19.1</maven.failsafe.version>
+    <maven.surefire.version>2.19.1</maven.surefire.version>
     <maven.cargo.version>1.4.14</maven.cargo.version>
-    <cargo.tomcat.version>7.0.53</cargo.tomcat.version>
-    <cargo.container.timeout>300000</cargo.container.timeout>
-    <cargo.jvmargs.extra1>-Xmx3g -XX:MaxPermSize=256m</cargo.jvmargs.extra1>
-    <cargo.jvmargs.extra2></cargo.jvmargs.extra2>
-    <!-- This version works with the currect jenkins jacoco plugin 1.0.19 -->
+    <maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
     <jacoco.version>0.7.7.201606060606</jacoco.version>
-    <jacoco.agent.arg/>
+    <h2.version>1.4.193</h2.version>
+    <failsafe.argLine />
+    <jacoco.agent.arg />
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring.framework.version>3.2.14.RELEASE</spring.framework.version>
-    <groovy.version>2.4.4</groovy.version>
-    <restassured.version>2.4.1</restassured.version>
-    <hamcrest.version>1.3</hamcrest.version>
-    <jmock.version>2.6.0</jmock.version>
-    <!-- JUnit-dep does not exist for 4.12 -->
-    <junit.version>4.11</junit.version>
-    <failsafe.argLine />
-    <!-- Function tests should be skipped by default. Each module which need to run those -->
-    <!-- has to add this property to itself. -->
-    <ft.skip>true</ft.skip>
-
     
-    <!--SONAR-->
+    <alfresco.db.name>alf_dev</alfresco.db.name>
+    <alfresco.db.username>alfresco</alfresco.db.username>
+    <alfresco.db.password>alfresco</alfresco.db.password>
+    <alfresco.db.params>AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;MVCC=FALSE;LOCK_MODE=0</alfresco.db.params>
+    <alfresco.db.url>jdbc:h2:${alfresco.data.location}/h2_data/${alfresco.db.name};${alfresco.db.params}</alfresco.db.url>
+    <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
+    
+    <!-- Sonar -->
     <sonar.sources>src/main</sonar.sources>
     <!--<sonar.exclusions>**/*.xml, **/*.css</sonar.exclusions>-->
     <sonar.jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-all.exec</sonar.jacoco.reportPath>
@@ -68,6 +44,57 @@
       **/*.xml,
       **/*.js
     </sonar.coverage.exclusions>
+    
+    
+    <!-- Below is the required properties from the Alfresco SDK -->
+    <!-- Leaving them out works fine locally but does not when jenkins is used to build -->
+    <!-- Alfresco Maven Plugin version to use -->
+    <alfresco.sdk.version>3.0.0-beta-5</alfresco.sdk.version>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!-- Alfresco Data directory, which will contain:
+    Content Store (i.e. the files we upload)
+    Database (i.e. the metadata for the uploaded files)
+    Search index (i.e. the indexed content and metadata)
+   Configured in alfresco-global.properties with the 'dir.root' property.
+    -->
+    <alfresco.data.location>${project.build.directory}/alf_data_dev</alfresco.data.location>
+
+    <!-- Duplicated with alfresco.solrHome in the plugin, we need them out here to do filtering -->
+    <solr.home>${alfresco.data.location}/solr</solr.home>
+    <solr.model.dir>${solr.home}/alfrescoModels</solr.model.dir>
+    <solr.content.dir>${solr.home}/index</solr.content.dir>
+
+    <!-- Properties used in dependency declarations, you don't need to change these -->
+    <alfresco.groupId>org.alfresco</alfresco.groupId>
+    <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
+    <!-- Platform WAR artifact, change to 'alfresco-enterprise' if using Enterprise Edition -->
+    <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
+
+    <!-- Alfresco Platform and Share webapp versions, these are the original Alfresco webapps that will be
+    customized and then deployed and run by the tomcat maven plugin when
+    executing for example $ mvn clean install alfresco:run -->
+    <alfresco.platform.version>5.2.c-EA</alfresco.platform.version>
+    <alfresco.share.version>5.2.b-EA</alfresco.share.version>
+
+    <!-- Alfresco Surf version, if you change Share version you might need to change Surf version -->
+    <alfresco.surf.version>6.10</alfresco.surf.version>
+
+    <!-- Aikau framework version, it is released separately, so it can be useful to be able
+    to bring in newer versions with bug fixes etc -->
+    <aikau.version>1.0.93</aikau.version>
+
+    <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
+    <jrebel.version>1.1.6</jrebel.version>
+
+    <!-- Environment to use, Alfresco Maven Plugin will
+    copy alfresco-global-*.properties files from this directory, such as src/test/properties/local -->
+    <env>local</env>
+
+    <!-- Compile with Java 7, default is 5 -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <developers>
@@ -161,498 +188,134 @@
 
   <!-- Here we realize the connection with the Alfresco selected platform (e.g.version and edition) -->
   <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>${alfresco.groupId}</groupId>
-        <artifactId>alfresco-repository</artifactId>
-        <version>${alfresco.version}</version>
-        <classifier>h2scripts</classifier>
-      </dependency>
-      <dependency>
-        <groupId>${alfresco.groupId}</groupId>
-        <artifactId>alfresco-platform-distribution</artifactId>
-        <version>${alfresco.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>${alfresco.groupId}</groupId>
-        <artifactId>alfresco-repository</artifactId>
-        <version>${alfresco.version}</version>
-        <scope>provided</scope>
-        <exclusions>
-          <exclusion>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>${alfresco.groupId}</groupId>
-        <artifactId>alfresco-remote-api</artifactId>
-        <version>${alfresco.version}</version>
-      </dependency>
-      <!-- Test dependencies -->
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-        <scope>test</scope>
-      </dependency>
 
-      <dependency>
-        <groupId>org.jmock</groupId>
-        <artifactId>jmock</artifactId>
-        <version>${jmock.version}</version>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.jmock</groupId>
-        <artifactId>jmock-legacy</artifactId>
-        <version>${jmock.version}</version>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.jmock</groupId>
-        <artifactId>jmock-junit4</artifactId>
-        <version>${jmock.version}</version>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.codehaus.groovy</groupId>
-        <artifactId>groovy-all</artifactId>
-        <version>${groovy.version}</version>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-library</artifactId>
-        <version>${hamcrest.version}</version>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest-core</artifactId>
-        <version>${hamcrest.version}</version>
-        <scope>test</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit-dep</artifactId>
-        <version>${junit.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-context</artifactId>
-        <version>${spring.framework.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-test</artifactId>
-        <version>${spring.framework.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.jayway.restassured</groupId>
-        <artifactId>rest-assured</artifactId>
-        <version>${restassured.version}</version>
-
-        <exclusions>
-          <exclusion>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-xml</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-json</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-    </dependencies>
   </dependencyManagement>
 
   <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution POM -->
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring.framework.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>provided</scope>
-    </dependency>
+
   </dependencies>
 
   <build>
-    <finalName>${project.artifactId}-${project.version}</finalName>
     <plugins>
-
-      <!-- ###################################################################### -->
-      <!-- Set default properties so that we don't have to multiply plugin config -->
-      <!-- ###################################################################### -->
-      <plugin>
-        <groupId>org.redpill-linpro.alfresco</groupId>
-        <artifactId>properties-maven-plugin</artifactId>
-        <version>1.0.0</version>
-        <executions>
-          <execution>
-            <id>set-default-properties</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>set-properties</goal>
-            </goals>
-            <configuration>
-              <properties>
-                <jacoco.agent.arg />
-                <jacoco-it.agent.arg />
-                <jacoco-ft.agent.arg />
-              </properties>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!--<plugin>
-        <groupId>com.amashchenko.maven.plugin</groupId>
-        <artifactId>gitflow-maven-plugin</artifactId>
-        <version>1.0.8</version>
-        <configuration>
-        </configuration>
-      </plugin>
--->
       <!-- ################################################################ -->
       <!-- Override surefire configuration to allow for integration testing -->
       <!-- ################################################################ -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
+        <version>${maven.surefire.version}</version>
+	<configuration>
+	  <trimStackTrace>false</trimStackTrace>
+	  <useFile>false</useFile>
           <excludes>
             <exclude>**/*IntegrationTest.java</exclude>
             <exclude>**/*FunctionalTest.java</exclude>
           </excludes>
           <argLine>${jacoco.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
         </configuration>
-        <!--<executions>
-          <execution>
-            <id>default-test</id>
-            <configuration>
-              <skipTests>false</skipTests>
-            </configuration>
-          </execution>
-        </executions>-->
-      </plugin>
-
-      <plugin>
-        <groupId>net.alchim31.maven</groupId>
-        <artifactId>yuicompressor-maven-plugin</artifactId>
-        <version>1.3.2</version>
-        <executions>
-          <execution>
-            <id>minimize-javascript</id>
-            <goals>
-              <goal>compress</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <excludes>
-            <exclude>${project.basedir}/src/main/amp/config/**/*.js</exclude>
-            <exclude>${project.build.directory}/**/*.js</exclude>
-            <exclude>**/target/**</exclude>
-            <exclude>**/*-min.js</exclude>
-            <exclude>**/*-min.css</exclude>
-            <exclude>**/WEB-INF/**</exclude>
-            <exclude>**/tiny_mce/**</exclude>
-            <exclude>**/log4javascript*.js</exclude>
-          </excludes>
-          <sourceDirectory>${project.basedir}/src/main/amp/web</sourceDirectory>
-          <outputDirectory>${project.build.directory}/${project.build.finalName}/web</outputDirectory>
-          <force>true</force>
-          <statistics>false</statistics>
-          <jswarn>false</jswarn>
-          <encoding>UTF-8</encoding>
-          <preProcessAggregates>true</preProcessAggregates>
-          <excludeResources>true</excludeResources>
-        </configuration>
       </plugin>
     </plugins>
-
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.alfresco.maven.plugin</groupId>
-          <artifactId>alfresco-maven-plugin</artifactId>
-          <version>${maven.alfresco.version}</version>
-          <extensions>true</extensions>
-          <configuration>
-            <verbose>false</verbose>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${maven.compiler.version}</version>
-          <configuration>
-            <source>${java.source.version}</source>
-            <target>${java.target.version}</target>
-          </configuration>
-        </plugin>
-
-        <!-- ####################################### -->
-        <!-- also clean out local jar file in tomcat -->
-        <!-- ####################################### -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>2.5</version>
-          <configuration>
-            <filesets>
-              <fileset>
-                <directory>${tomcat.home}/shared/classes/alfresco/module/${project.artifactId}</directory>
-              </fileset>
-              <fileset>
-                <directory>${tomcat.home}/webapps/${alfresco.client.war}/WEB-INF/lib</directory>
-                <includes>
-                  <include>${project.build.finalName}.jar</include>
-                </includes>
-              </fileset>
-            </filesets>
-          </configuration>
-        </plugin>
-
-        <!-- ######################################### -->
-        <!-- Copy dependency jar files to local tomcat -->
-        <!-- ######################################### -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>2.10</version>
-          <executions>
-            <execution>
-              <id>hot-copy-dependencies</id>
-              <goals>
-                <goal>copy-dependencies</goal>
-              </goals>
-              <configuration>
-                <outputDirectory>${tomcat.home}/webapps/${alfresco.client.war}/WEB-INF/lib</outputDirectory>
-                <overWriteReleases>false</overWriteReleases>
-                <overWriteSnapshots>false</overWriteSnapshots>
-                <overWriteIfNewer>true</overWriteIfNewer>
-                <includeScope>runtime</includeScope>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>2.5</version>
-          <executions>
-            <execution>
-              <id>hot-copy-resources</id>
-              <goals>
-                <goal>copy-resources</goal>
-              </goals>
-              <configuration>
-                <outputDirectory>${tomcat.home}/webapps/${app.amp.client.war.artifactId}/WEB-INF/lib</outputDirectory>
-                <resources>
-                  <resource>
-                    <directory>${project.build.directory}/${project.build.finalName}/lib</directory>
-                    <includes>
-                      <include>${project.build.finalName}.jar</include>
-                    </includes>
-                  </resource>
-                  <resource>
-                    <directory>${project.build.directory}/amp/lib</directory>
-                    <includes>
-                      <include>${project.build.finalName}.jar</include>
-                    </includes>
-                  </resource>
-                </resources>
-              </configuration>
-            </execution>
-
-            <execution>
-              <id>hot-copy-web-resources</id>
-              <goals>
-                <goal>copy-resources</goal>
-              </goals>
-              <configuration>
-                <outputDirectory>${tomcat.home}/webapps/${app.amp.client.war.artifactId}</outputDirectory>
-                <resources>
-                  <resource>
-                    <directory>src/main/amp/web</directory>
-                  </resource>
-                  <resource>
-                    <directory>${project.build.directory}/${project.build.finalName}/web</directory>
-                    <includes>
-                      <include>**/*.*</include>
-                    </includes>
-                    <filtering>true</filtering>
-                  </resource>
-                  <resource>
-                    <directory>${project.build.directory}/amp/web</directory>
-                    <includes>
-                      <include>**/*.*</include>
-                    </includes>
-                    <filtering>true</filtering>
-                  </resource>
-                </resources>
-              </configuration>
-            </execution>
-
-            <execution>
-              <id>hot-copy-config-resources</id>
-              <goals>
-                <goal>copy-resources</goal>
-              </goals>
-              <configuration>
-                <outputDirectory>${tomcat.home}/shared/classes/alfresco</outputDirectory>
-                <resources>
-                  <resource>
-                    <directory>${project.build.directory}/${project.build.finalName}/config/alfresco</directory>
-                    <includes>
-                      <include>**/*</include>
-                    </includes>
-                    <filtering>true</filtering>
-                  </resource>
-                  <resource>
-                    <directory>${project.build.directory}/amp/config/alfresco</directory>
-                    <includes>
-                      <include>**/*</include>
-                    </includes>
-                    <filtering>true</filtering>
-                  </resource>
-                </resources>
-              </configuration>
-            </execution>
-
-            <execution>
-              <id>hot-copy-jrebel-config</id>
-              <goals>
-                <goal>copy-resources</goal>
-              </goals>
-              <configuration>
-                <outputDirectory>${tomcat.home}/webapps/${app.amp.client.war.artifactId}/WEB-INF/classes</outputDirectory>
-                <resources>
-                  <resource>
-                    <directory>${project.build.directory}/classes</directory>
-                    <includes>
-                      <include>rebel.xml</include>
-                    </includes>
-                    <filtering>true</filtering>
-                  </resource>
-                </resources>
-              </configuration>
-            </execution>
-          </executions>
-
-          <configuration>
-            <overwrite>true</overwrite>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.redpill-linpro.alfresco</groupId>
-          <artifactId>refreshwebscripts-maven-plugin</artifactId>
-          <version>1.0.2</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.zeroturnaround</groupId>
-          <artifactId>jrebel-maven-plugin</artifactId>
-          <version>1.1.3</version>
-        </plugin>
-
-        <!-- ############################################################################ -->
-        <!-- Here we define the failsafe plugin to run our integration & functional tests -->
-        <!-- ############################################################################ -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${maven.failsafe.version}</version>
-          <configuration>
-            <skipTests>true</skipTests>
-            <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-          </configuration>
-          <executions>
-            <execution>
-              <id>integration-test</id>
-              <phase>test</phase>
-              <goals>
-                <goal>integration-test</goal>
-                <goal>verify</goal>
-              </goals>
-              <configuration>
-                <argLine>${jacoco-it.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
-                <excludes>
-                  <exclude>**/*FunctionalTest.java</exclude>
-                </excludes>
-                <includes>
-                  <include>**/*IntegrationTest.java</include>
-                </includes>
-              </configuration>
-            </execution>
-            <execution>
-              <id>functional-test</id>
-              <phase>integration-test</phase>
-              <goals>
-                <goal>integration-test</goal>
-                <goal>verify</goal>
-              </goals>
-              <configuration>
-                <systemPropertyVariables>
-                  <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
-                  <cargo.rmi.port>${cargo.rmi.port}</cargo.rmi.port>
-                </systemPropertyVariables>
-                <argLine>${failsafe.argLine} -Xms256m -Xmx1G -XX:PermSize=512m</argLine>
-                <excludes>
-                  <exclude>**/*IntegrationTest.java</exclude>
-                </excludes>
-                <includes>
-                  <include>**/*FunctionalTest.java</include>
-                </includes>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 
   <profiles>
-    <!-- ############################################### -->
-    <!-- profile to copy all code to the exploded tomcat -->
-    <!-- ############################################### -->
+    
+    
+
     <profile>
+      <!-- ############################################### -->
+      <!-- profile to copy all code to the exploded tomcat -->
+      <!-- ############################################### -->
       <id>dev</id>
       <properties>
         <alfresco.webapp.name>alfresco</alfresco.webapp.name>
       </properties>
       <build>
+        <pluginManagement>
+          <plugins>
+            <!-- ####################################### -->
+            <!-- also clean out local jar file in tomcat -->
+            <!-- ####################################### -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-clean-plugin</artifactId>
+              <version>2.5</version>
+              <configuration>
+                <filesets>
+                  <fileset>
+                    <directory>${tomcat.home}/webapps/${alfresco.client.war}/WEB-INF/classes/alfresco/module/${project.artifactId}</directory>
+                  </fileset>
+                  <fileset>
+                    <directory>${tomcat.home}/webapps/${alfresco.client.war}/WEB-INF/lib</directory>
+                    <includes>
+                      <include>${project.build.finalName}.jar</include>
+                    </includes>
+                  </fileset>
+                </filesets>
+              </configuration>
+            </plugin>
+
+            <!-- ######################################### -->
+            <!-- Copy dependency jar files to local tomcat -->
+            <!-- ######################################### -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>hot-copy-dependencies</id>
+                  <goals>
+                    <goal>copy-dependencies</goal>
+                  </goals>
+                  <configuration>
+                    <outputDirectory>${tomcat.home}/webapps/${alfresco.client.war}/WEB-INF/lib</outputDirectory>
+                    <overWriteReleases>false</overWriteReleases>
+                    <overWriteSnapshots>false</overWriteSnapshots>
+                    <overWriteIfNewer>true</overWriteIfNewer>
+                    <includeScope>runtime</includeScope>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-resources-plugin</artifactId>
+              <version>${maven-resources-plugin.version}</version>
+              <executions>
+                <execution>
+                  <id>hot-copy-resources</id>
+                  <goals>
+                    <goal>copy-resources</goal>
+                  </goals>
+                  <configuration>
+                    <outputDirectory>${tomcat.home}/webapps/${alfresco.client.war}/WEB-INF/lib</outputDirectory>
+                    <resources>
+                      <resource>
+                        <directory>${project.build.directory}/</directory>
+                        <includes>
+                          <include>${project.build.finalName}.jar</include>
+                        </includes>
+                      </resource>
+                    </resources>
+                  </configuration>
+                </execution>
+
+              </executions>
+
+              <configuration>
+                <overwrite>true</overwrite>
+              </configuration>
+            </plugin>
+
+            <plugin>
+              <groupId>org.redpill-linpro.alfresco</groupId>
+              <artifactId>refreshwebscripts-maven-plugin</artifactId>
+              <version>1.0.2</version>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+
         <plugins>
           <plugin>
             <artifactId>maven-clean-plugin</artifactId>
@@ -760,118 +423,75 @@
         </plugins>
       </build>
     </profile>
-
-    <!-- ########################################################################## -->
-    <!-- code coverage profile that enables jacoco which creates nice code coverage -->
-    <!-- on integration tests too -->
-    <!-- ########################################################################## -->
+    
     <profile>
-      <id>jenkins</id>
-      <activation>
-        <property>
-          <name>env.BUILD_NUMBER</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.version}</version>
-            <executions>
-              <execution>
-                <id>pre-unit-test</id>
-                <phase>initialize</phase>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-                <configuration>
-                  <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
-                  <propertyName>jacoco.agent.arg</propertyName>
-                </configuration>
-              </execution>
-
-              <execution>
-                <id>pre-integration-test</id>
-                <phase>initialize</phase>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-                <configuration>
-                  <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
-                  <propertyName>jacoco-it.agent.arg</propertyName>
-                </configuration>
-              </execution>
-
-              <execution>
-                <id>pre-functional-test</id>
-                <phase>initialize</phase>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-                <configuration>
-                  <destFile>${project.build.directory}/coverage-reports/jacoco-ft.exec</destFile>
-                  <propertyName>jacoco-ft.agent.arg</propertyName>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
-      <id>report</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>${jacoco.version}</version>
-            <executions>
-              <execution>
-                <id>merge-all-tests</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>merge</goal>
-                </goals>
-                <configuration>
-                  <fileSets>
-                    <fileSet>
-                      <directory>${project.build.directory}/coverage-reports</directory>
-                      <includes>
-                        <include>*.exec</include>
-                      </includes>
-                      <excludes>
-                        <exclude>**/*-all.exec</exclude>
-                      </excludes>
-                    </fileSet>
-                  </fileSets>
-                  <destFile>${project.build.directory}/coverage-reports/jacoco-all.exec</destFile>
-                </configuration>
-              </execution>
-
-              <execution>
-                <id>report-all-tests</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-                <configuration>
-                  <dataFile>${project.build.directory}/coverage-reports/jacoco-all.exec</dataFile>
-                  <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
+      <!-- ############################################################################ -->
+      <!-- Here we define our integration test features                                 -->
+      <!-- ############################################################################ -->
       <id>it</id>
+      <properties>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      </properties>
       <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-failsafe-plugin</artifactId>
+              <version>${maven.failsafe.version}</version>
+	      <configuration>
+                <trimStackTrace>false</trimStackTrace>
+                <useFile>false</useFile>
+                <skipTests>true</skipTests>
+                <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>integration-test</id>
+                  <phase>test</phase>
+                  <goals>
+                    <goal>integration-test</goal>
+                    <goal>verify</goal>
+                  </goals>
+                  <configuration>
+                    <argLine>${jacoco-it.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
+                    <excludes>
+                      <exclude>**/*FunctionalTest.java</exclude>
+                    </excludes>
+                    <includes>
+                      <include>**/*IntegrationTest.java</include>
+                    </includes>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+
+
         <plugins>
+          <!-- ###################################################################### -->
+          <!-- Set default properties so that we don't have to multiply plugin config -->
+          <!-- ###################################################################### -->
+          <plugin>
+            <groupId>org.redpill-linpro.alfresco</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0.0</version>
+            <executions>
+              <execution>
+                <id>set-default-properties</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>set-properties</goal>
+                </goals>
+                <configuration>
+                  <properties>
+                    <jacoco-it.agent.arg />
+                  </properties>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
@@ -886,63 +506,113 @@
           </plugin>
         </plugins>
       </build>
-    </profile>
 
+    </profile>
+    
     <profile>
       <id>ft</id>
+      
+      <properties>
+        <cargo.tomcat.version>7.0.59</cargo.tomcat.version>
+        <cargo.container.timeout>300000</cargo.container.timeout>
+        <cargo.jvmargs.extra1>-Xmx3g -XX:MaxPermSize=256m</cargo.jvmargs.extra1>
+        <cargo.jvmargs.extra2></cargo.jvmargs.extra2>
+        <app.amp.client.war.folder>${project.build.directory}/alfresco</app.amp.client.war.folder>
+        <ft.skip>true</ft.skip>
+      </properties>
       <dependencies>
-        
+        <!-- 
+                <dependency>
+                  <groupId>com.jayway.restassured</groupId>
+                  <artifactId>rest-assured</artifactId>
+                  <version>${restassured.version}</version>
+                  <exclusions>
+                    <exclusion>
+                      <groupId>org.codehaus.groovy</groupId>
+                      <artifactId>groovy</artifactId>
+                    </exclusion>
+                    <exclusion>
+                      <groupId>org.codehaus.groovy</groupId>
+                      <artifactId>groovy-xml</artifactId>
+                    </exclusion>
+                    <exclusion>
+                      <groupId>org.codehaus.groovy</groupId>
+                      <artifactId>groovy-json</artifactId>
+                    </exclusion>
+                  </exclusions>
+                </dependency>
+        -->
         <dependency>
-          <groupId>com.jayway.restassured</groupId>
-          <artifactId>rest-assured</artifactId>
-          <version>${restassured.version}</version>
-          <exclusions>
-            <exclusion>
-              <groupId>org.codehaus.groovy</groupId>
-              <artifactId>groovy</artifactId>
-            </exclusion>
-            <exclusion>
-              <groupId>org.codehaus.groovy</groupId>
-              <artifactId>groovy-xml</artifactId>
-            </exclusion>
-            <exclusion>
-              <groupId>org.codehaus.groovy</groupId>
-              <artifactId>groovy-json</artifactId>
-            </exclusion>
-          </exclusions>
-        </dependency>
-        <dependency>
-          <groupId>org.springframework</groupId>
-          <artifactId>spring-instrument-tomcat</artifactId>
-          <version>3.2.10.RELEASE</version>
-          <scope>test</scope>
-        </dependency>
-
-        <dependency>
-          <groupId>${alfresco.client.war.groupId}</groupId>
-          <artifactId>${alfresco.client.war}</artifactId>
+          <groupId>${alfresco.groupId}</groupId>
+          <artifactId>${alfresco.platform.war.artifactId}</artifactId>
           <type>war</type>
-          <version>${alfresco.client.war.version}</version>
+          <version>${alfresco.platform.version}</version>
           <scope>test</scope>
         </dependency>
 
         <dependency>
           <groupId>${alfresco.groupId}</groupId>
           <artifactId>alfresco-repository</artifactId>
-          <version>${alfresco.version}</version>
+          <version>${alfresco.platform.version}</version>
         </dependency>
         <dependency>
           <groupId>org.alfresco</groupId>
           <artifactId>alfresco-repository</artifactId>
-          <version>${alfresco.version}</version>
+          <version>${alfresco.platform.version}</version>
           <classifier>h2scripts</classifier>
+        </dependency>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <version>${h2.version}</version>
         </dependency>
      
       </dependencies>
 
       <build>
+        
+        
         <pluginManagement>
           <plugins>
+            
+            <!-- ############################################################################ -->
+            <!-- Here we define the failsafe plugin to run our integration & functional tests -->
+            <!-- ############################################################################ -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-failsafe-plugin</artifactId>
+              <version>${maven.failsafe.version}</version>
+	      <configuration>
+                <trimStackTrace>false</trimStackTrace>
+                <useFile>false</useFile>
+                <skipTests>true</skipTests>
+                <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>functional-test</id>
+                  <phase>integration-test</phase>
+                  <goals>
+                    <goal>integration-test</goal>
+                    <goal>verify</goal>
+                  </goals>
+                  <configuration>
+                    <systemPropertyVariables>
+                      <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
+                      <cargo.rmi.port>${cargo.rmi.port}</cargo.rmi.port>
+                    </systemPropertyVariables>
+                    <argLine>${failsafe.argLine} -Xms256m -Xmx1G -XX:PermSize=512m</argLine>
+                    <excludes>
+                      <exclude>**/*IntegrationTest.java</exclude>
+                    </excludes>
+                    <includes>
+                      <include>**/*FunctionalTest.java</include>
+                    </includes>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+            
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-dependency-plugin</artifactId>
@@ -961,10 +631,10 @@
                     <outputDirectory>${app.amp.client.war.folder}</outputDirectory>
                     <artifactItems>
                       <artifactItem>
-                        <groupId>${alfresco.client.war.groupId}</groupId>
-                        <artifactId>${alfresco.client.war}</artifactId>
+                        <groupId>${alfresco.groupId}</groupId>
+                        <artifactId>${alfresco.platform.war.artifactId}</artifactId>
                         <type>war</type>
-                        <version>${alfresco.client.war.version}</version>
+                        <version>${alfresco.platform.version}</version>
                       </artifactItem>
                     </artifactItems>
                   </configuration>
@@ -991,7 +661,7 @@
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-resources-plugin</artifactId>
-
+              <version>${maven-resources-plugin.version}</version>
               <configuration>
                 <skip>${ft.skip}</skip>
               </configuration>
@@ -1143,10 +813,6 @@
                   <dependencies>
                     
                     <dependency>
-                      <groupId>org.springframework</groupId>
-                      <artifactId>spring-instrument-tomcat</artifactId>
-                    </dependency>
-                    <dependency>
                       <groupId>com.h2database</groupId>
                       <artifactId>h2</artifactId>
                     </dependency>
@@ -1158,7 +824,7 @@
                   <deployable>
                     <!-- Override location to point to the exploded webapp. -->
                     <groupId>${alfresco.client.war.groupId}</groupId>
-                    <artifactId>${alfresco.client.war}</artifactId>
+                    <artifactId>${alfresco.platform.war.artifactId}</artifactId>
                     <type>war</type>
                     <location>${app.amp.client.war.folder}</location>
                     <properties>
@@ -1215,6 +881,28 @@
         </pluginManagement>
 
         <plugins>
+          <!-- ###################################################################### -->
+          <!-- Set default properties so that we don't have to multiply plugin config -->
+          <!-- ###################################################################### -->
+          <plugin>
+            <groupId>org.redpill-linpro.alfresco</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0.0</version>
+            <executions>
+              <execution>
+                <id>set-default-properties</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>set-properties</goal>
+                </goals>
+                <configuration>
+                  <properties>
+                    <jacoco-ft.agent.arg />
+                  </properties>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
@@ -1252,14 +940,104 @@
                 <configuration>
                   <skipTests>${ft.skip}</skipTests>
                 </configuration>
+              </execution> 
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+    <!-- ########################################################################## -->
+    <!-- code coverage profile that enables jacoco which creates nice code coverage -->
+    <!-- on integration tests too -->
+    <!-- ########################################################################## -->
+    <profile>
+      <id>jenkins</id>
+      <activation>
+        <property>
+          <name>env.BUILD_NUMBER</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
+            <executions>
+              <execution>
+                <id>pre-unit-test</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
+                  <propertyName>jacoco.agent.arg</propertyName>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>pre-integration-test</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+                  <propertyName>jacoco-it.agent.arg</propertyName>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>pre-functional-test</id>
+                <phase>initialize</phase>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-ft.exec</destFile>
+                  <propertyName>jacoco-ft.agent.arg</propertyName>
+                </configuration>
+              </execution>
+              <execution>
+                <id>merge-all-tests</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>merge</goal>
+                </goals>
+                <configuration>
+                  <fileSets>
+                    <fileSet>
+                      <directory>${project.build.directory}/coverage-reports</directory>
+                      <includes>
+                        <include>*.exec</include>
+                      </includes>
+                      <excludes>
+                        <exclude>**/*-all.exec</exclude>
+                      </excludes>
+                    </fileSet>
+                  </fileSets>
+                  <destFile>${project.build.directory}/coverage-reports/jacoco-all.exec</destFile>
+                </configuration>
+              </execution>
+
+              <execution>
+                <id>report-all-tests</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <dataFile>${project.build.directory}/coverage-reports/jacoco-all.exec</dataFile>
+                  <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+                </configuration>
               </execution>
             </executions>
           </plugin>
         </plugins>
       </build>
     </profile>
-
-    
   </profiles>
 
   <distributionManagement>
