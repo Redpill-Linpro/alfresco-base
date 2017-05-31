@@ -130,11 +130,6 @@
 
   </dependencyManagement>
 
-  <!-- Following dependencies are needed for compiling Java code in src/main/java; <scope>provided</scope> is inherited for each of the following; for more info, please refer to alfresco-platform-distribution POM -->
-  <dependencies>
-
-  </dependencies>
-
   <build>
 
   </build>
@@ -339,81 +334,11 @@
       </build>
     </profile>
 
-    <profile>
-      <!-- ############################################################################ -->
-      <!-- Here we define our integration test features                                 -->
-      <!-- ############################################################################ -->
-      <id>it</id>
-      <properties>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      </properties>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-failsafe-plugin</artifactId>
-              <version>${maven.failsafe.version}</version>
-              <configuration>
-                <trimStackTrace>false</trimStackTrace>
-                <useFile>false</useFile>
-                <skipTests>true</skipTests>
-                <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-              </configuration>
-              <executions>
-                <execution>
-                  <id>integration-test</id>
-                  <phase>test</phase>
-                  <goals>
-                    <goal>integration-test</goal>
-                    <goal>verify</goal>
-                  </goals>
-                  <configuration>
-                    <argLine>${jacoco-it.agent.arg} ${failsafe.argLine} -Xms256m -Xmx2G -XX:PermSize=512m</argLine>
-                    <excludes>
-                      <exclude>**/*FunctionalTest.java</exclude>
-                    </excludes>
-                    <includes>
-                      <include>**/*IntegrationTest.java</include>
-                    </includes>
-                  </configuration>
-                </execution>
-              </executions>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-
-
-        <plugins>
-          <!-- ###################################################################### -->
-          <!-- Set default properties so that we don't have to multiply plugin config -->
-          <!-- ###################################################################### -->
-          <plugin>
-            <groupId>org.redpill-linpro.alfresco</groupId>
-            <artifactId>properties-maven-plugin</artifactId>
-            <version>1.0.0</version>
-            <executions>
-              <execution>
-                <id>set-default-properties</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>set-properties</goal>
-                </goals>
-                <configuration>
-                  <properties>
-                    <jacoco-it.agent.arg />
-                  </properties>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-
-    </profile>
+   
     <!-- ########################################################################## -->
     <!-- code coverage profile that enables jacoco which creates nice code coverage -->
-    <!-- on integration tests too -->
+    <!-- on integration tests too                                                   -->
+    <!-- Currently work in progress and is not working                              -->
     <!-- ########################################################################## -->
     <profile>
       <id>jenkins</id>
@@ -474,6 +399,9 @@
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>${jacoco.version}</version>
+            <configuration>
+              <append>true</append>
+            </configuration>
             <executions>
                        <execution>
             <id>prepare-agent</id>
@@ -521,7 +449,7 @@
             <id>pre-integration-test</id>
             <phase>pre-integration-test</phase>
             <goals>
-              <goal>prepare-agent</goal>
+              <goal>prepare-agent-integration</goal>
             </goals>
             <configuration>
               <!-- Sets the path to the file which contains the execution data. -->
@@ -572,7 +500,7 @@
               </fileSets>
               <destFile>${jacoco.reportPath}/jacoco-all.exec</destFile>
             </configuration>
-          </execution>-->
+          </execution>--> <!--
           <execution>
             <id>report-aggregate</id>
             <phase>verify</phase>
@@ -581,7 +509,7 @@
             </goals>
 
           </execution>
-          <!--
+         
           <execution>
             <id>report-all-tests</id>
             <phase>verify</phase>
@@ -593,6 +521,13 @@
               <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
             </configuration>
           </execution>-->
+           <execution>
+                <id>jacoco-site</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
         </executions>
       </plugin>
     </plugins>
