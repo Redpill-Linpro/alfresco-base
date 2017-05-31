@@ -11,15 +11,15 @@
   <description>The Parent POM for all RLP based Alfresco projects</description>
 
   <properties>
-    <jacoco.version>0.7.7.201606060606</jacoco.version>
-    <maven.surefire.version>2.10</maven.surefire.version>
+    <jacoco.version>0.7.9</jacoco.version>
+    <maven.surefire.version>2.20</maven.surefire.version>
     <jacoco.agent.arg />
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!-- Sonar -->
     <sonar.sources>src/main</sonar.sources>
     <!--<sonar.exclusions>**/*.xml, **/*.css</sonar.exclusions>-->
-    <sonar.jacoco.reportPath>${project.build.directory}/coverage-reports/jacoco-all.exec</sonar.jacoco.reportPath>
+    <sonar.jacoco.reportPaths>target/jacoco.exec,target/jacoco-ut.exec,target/jacoco-it.exec</sonar.jacoco.reportPaths>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.coverage.exclusions>
@@ -28,10 +28,11 @@
       **/*.xml,
       **/*.js
     </sonar.coverage.exclusions>
-
+    <jacoco.reportPath>${project.build.directory}</jacoco.reportPath>
     <!-- Compile with Java 7, default is 5 -->
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.alfresco.tomcat.port>8765</maven.alfresco.tomcat.port>
   </properties>
 
   <developers>
@@ -427,12 +428,14 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.20</version>
+            <version>${maven.surefire.version}</version>
             <configuration>
               <!-- Sets the VM argument line used when unit tests are run. -->
               <argLine>${surefireArgLine}</argLine>
               <!-- Skips unit tests if the value of skip.unit.tests property is true -->
               <skipTests>${skip.unit.tests}</skipTests>
+              <forkCount>1</forkCount>
+              <runOrder>random</runOrder>
           <!-- Excludes integration tests when unit tests are run. 
           <excludes>
             <exclude>**/IT*.java</exclude>
@@ -444,6 +447,7 @@
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>2.15</version>
         <executions>
+
           <!--
             Ensures that both integration-test and verify goals of the Failsafe Maven
             plugin are executed.
@@ -471,6 +475,12 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>${jacoco.version}</version>
             <executions>
+                       <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
               <execution>
                 <id>pre-unit-test</id>
                 <phase>initialize</phase>
@@ -479,7 +489,7 @@
                 </goals>
                 <configuration>
                   <!-- Sets the path to the file which contains the execution data. -->
-                  <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                  <destFile>${jacoco.reportPath}/jacoco-ut.exec</destFile>
              <!--
                 Sets the name of the property containing the settings
                 for JaCoCo runtime agent.
@@ -496,7 +506,7 @@
             </goals>
             <configuration>
               <!-- Sets the path to the file which contains the execution data. -->
-              <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+              <dataFile>${jacoco.reportPath}/jacoco-ut.exec</dataFile>
               <!-- Sets the output directory for the code coverage report. -->
               <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
             </configuration>
@@ -515,7 +525,7 @@
             </goals>
             <configuration>
               <!-- Sets the path to the file which contains the execution data. -->
-              <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+              <destFile>${jacoco.reportPath}/jacoco-it.exec</destFile>
                 <!--
                     Sets the name of the property containing the settings
                     for JaCoCo runtime agent.
@@ -535,13 +545,13 @@
             </goals>
             <configuration>
               <!-- Sets the path to the file which contains the execution data. -->
-              <dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
+              <dataFile>${jacoco.reportPath}/jacoco-it.exec</dataFile>
               <!-- Sets the output directory for the code coverage report. -->
               <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
             </configuration>
           </execution>
 
-
+<!--
           <execution>
             <id>merge-all-tests</id>
             <phase>verify</phase>
@@ -551,7 +561,7 @@
             <configuration>
               <fileSets>
                 <fileSet>
-                  <directory>${project.build.directory}/coverage-reports</directory>
+                  <directory>${jacoco.reportPath}</directory>
                   <includes>
                     <include>*.exec</include>
                   </includes>
@@ -560,10 +570,18 @@
                   </excludes>
                 </fileSet>
               </fileSets>
-              <destFile>${project.build.directory}/coverage-reports/jacoco-all.exec</destFile>
+              <destFile>${jacoco.reportPath}/jacoco-all.exec</destFile>
             </configuration>
-          </execution>
+          </execution>-->
+          <execution>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
 
+          </execution>
+          <!--
           <execution>
             <id>report-all-tests</id>
             <phase>verify</phase>
@@ -571,10 +589,10 @@
               <goal>report</goal>
             </goals>
             <configuration>
-              <dataFile>${project.build.directory}/coverage-reports/jacoco-all.exec</dataFile>
+              <dataFile>${jacoco.reportPath}/jacoco-all.exec</dataFile>
               <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
             </configuration>
-          </execution>
+          </execution>-->
         </executions>
       </plugin>
     </plugins>
