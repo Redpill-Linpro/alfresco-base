@@ -4,7 +4,7 @@
 
   <groupId>com.redpill-linpro.alfresco</groupId>
   <artifactId>alfresco-base</artifactId>
-  <version>3.0.0</version>
+  <version>3.0.1</version>
   <packaging>pom</packaging>
 
   <name>Redpill Linpro Alfresco Parent POM</name>
@@ -33,6 +33,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.alfresco.tomcat.port>8765</maven.alfresco.tomcat.port>
+    <maven.alfresco.refresh.port>8765</maven.alfresco.refresh.port>
   </properties>
 
   <developers>
