@@ -105,6 +105,14 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
+    <repository>
+      <id>central-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
   </repositories>
 
   <pluginRepositories>
@@ -123,6 +131,14 @@
     <pluginRepository>
       <id>alfresco-snapshots</id>
       <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>central-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -347,11 +363,12 @@
     <!-- ########################################################################## -->
     <profile>
       <id>jenkins</id>
+      <!-- disable auto activation
       <activation>
         <property>
           <name>env.BUILD_NUMBER</name>
         </property>
-      </activation>
+      </activation>-->
       <build>
         <plugins>
 
